@@ -1,3 +1,4 @@
+// Determine if every character in a string is unique
 function isUnique(str) {
   let characters = {};
   for (let i = 0; i < str.length; i++) {
@@ -12,7 +13,12 @@ function isUnique(str) {
   return true;
 }
 
+// Determine if two strings are permutations (rearrangements of the letters) of each other
 function isPermutation(str1, str2) {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+
   let characters = {};
   for (let i = 0; i < str1.length; i++) {
     let char = str1[i];
