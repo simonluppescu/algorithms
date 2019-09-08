@@ -10,7 +10,7 @@ Your task is to calculate and return the distance the spider must jump to get to
 */
 
 const RADIAL_MAPPER = { A: 0, B: 1, C: 2, D: 3, E: 4, F: 5, G: 6, H: 7 };
-const NUM_RADIALS = Object.keys(RADIAL_MAPPER).length;
+const TOTAL_RADIALS = Object.keys(RADIAL_MAPPER).length;
 
 class JumpDistanceCalculator {
   constructor(spiderCoord, flyCoord) {
@@ -32,7 +32,7 @@ class JumpDistanceCalculator {
     );
     numRadialsBetween = Math.min(
       numRadialsBetween,
-      NUM_RADIALS - numRadialsBetween
+      TOTAL_RADIALS - numRadialsBetween
     );
     const radialDifference = this.convertNumRadialsToRadians(numRadialsBetween);
 
@@ -40,7 +40,7 @@ class JumpDistanceCalculator {
   }
 
   convertNumRadialsToRadians(numRadials) {
-    return (numRadials / NUM_RADIALS) * 2 * Math.PI;
+    return (numRadials / TOTAL_RADIALS) * 2 * Math.PI;
   }
 
   computeDistance(radialDifference) {
