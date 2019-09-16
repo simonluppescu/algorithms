@@ -1,5 +1,5 @@
-const assertArrayEquals = require("./assertArray");
-const Dequeue = require("./dequeue");
+const assertArrayEquals = require("./utils/assertArray");
+const Dequeue = require("./utils/dequeue");
 
 class Slider {
   constructor(arr, windowSize) {

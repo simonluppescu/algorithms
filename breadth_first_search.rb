@@ -1,5 +1,5 @@
-require_relative 'graph'
-require_relative 'queue'
+require_relative 'utils/graph'
+require_relative 'utils/queue'
 
 def bfs
   graph = create_graph
