@@ -69,7 +69,7 @@ class State {
     isAiPlayer() {
         return this.currentPlayerIndex === this.aiPlayer.index;
     }
-    apply(move) {
+    testMove(move) {
         const newState = new State();
         newState.state = this.state.map((value) => value.duplicate());
         newState.state[this.getNextPlayerIndex()].applyMove(move);
@@ -78,6 +78,11 @@ class State {
         newState.aiPlayer = this.aiPlayer;
         newState.currentPlayerIndex = this.getNextPlayerIndex();
         return newState;
+    }
+    applyMove(move) {
+        const nextPlayerIndex = this.getNextPlayerIndex();
+        this.state[nextPlayerIndex].applyMove(move);
+        this.currentPlayerIndex = nextPlayerIndex;
     }
     isTerminal() {
         return this.state[0].isLost() || this.state[1].isLost();
@@ -89,18 +94,13 @@ class State {
     }
 }
 class Game {
-    play() {
-        // Testing state
-        const state = new State(new Hands(4, 1), new Hands(1, 1));
-        state.currentPlayerIndex = 1;
-        this.getBestMove(state);
-    }
+    play() { }
     getBestMove(state) {
         const moves = state.getMoves();
         let bestMove;
         let bestUtility = Number.MIN_SAFE_INTEGER;
         moves.forEach((currMove, index) => {
-            let currUtility = this.minimax(state.apply(currMove), 2);
+            let currUtility = this.minimax(state.testMove(currMove), 2);
             if (currUtility > bestUtility) {
                 bestUtility = currUtility;
                 bestMove = currMove;
@@ -118,14 +118,14 @@ class Game {
         if (state.isAiPlayer()) {
             let max = Number.MIN_SAFE_INTEGER;
             moves.forEach((currMove, index) => {
-                max = Math.max(max, this.minimax(state.apply(currMove), depth - 1));
+                max = Math.max(max, this.minimax(state.testMove(currMove), depth - 1));
             });
             return max;
         }
         else {
             let min = Number.MAX_SAFE_INTEGER;
             moves.forEach((currMove, index) => {
-                min = Math.min(min, this.minimax(state.apply(currMove), depth - 1));
+                min = Math.min(min, this.minimax(state.testMove(currMove), depth - 1));
             });
             return min;
         }
