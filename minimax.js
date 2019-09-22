@@ -66,6 +66,9 @@ class State {
     getNextPlayerIndex() {
         return (this.currentPlayerIndex + 1) % this.players.length;
     }
+    isAiPlayer() {
+        return this.currentPlayerIndex === this.aiPlayer.index;
+    }
     apply(move) {
         const newState = new State();
         newState.state = this.state.map((value) => value.duplicate());
@@ -81,41 +84,51 @@ class State {
     }
     utility() {
         const humanUtility = this.state[this.humanPlayer.index].utility() * -1;
-        const aiUtility = this.state[this.aiPlayer.index].utility();
-        console.log(`human: ${humanUtility}, ai: ${aiUtility}`);
+        const aiUtility = this.state[this.aiPlayer.index].utility() * 1.2;
         return humanUtility + aiUtility;
     }
 }
 class Game {
     play() {
         // Testing state
-        const state = new State(new Hands(4, 3), new Hands(1, 2));
+        const state = new State(new Hands(4, 1), new Hands(1, 1));
         state.currentPlayerIndex = 1;
-        console.log(this.getBestMove(state));
+        this.getBestMove(state);
     }
     getBestMove(state) {
         const moves = state.getMoves();
         let bestMove;
         let bestUtility = Number.MIN_SAFE_INTEGER;
         moves.forEach((currMove, index) => {
-            console.log(state);
-            console.log(currMove);
-            let currUtility = this.minimax(state.apply(currMove), 0);
+            let currUtility = this.minimax(state.apply(currMove), 2);
             if (currUtility > bestUtility) {
                 bestUtility = currUtility;
                 bestMove = currMove;
             }
         });
+        console.log(`Chose this move with the utility ${bestUtility}`);
+        console.log(bestMove);
         return bestMove;
     }
     minimax(state, depth) {
         if (depth === 0 || state.isTerminal()) {
-            console.log("NEW STATE");
-            console.log(state);
             return state.utility();
         }
         const moves = state.getMoves();
-        moves.forEach((value, index) => { });
+        if (state.isAiPlayer()) {
+            let max = Number.MIN_SAFE_INTEGER;
+            moves.forEach((currMove, index) => {
+                max = Math.max(max, this.minimax(state.apply(currMove), depth - 1));
+            });
+            return max;
+        }
+        else {
+            let min = Number.MAX_SAFE_INTEGER;
+            moves.forEach((currMove, index) => {
+                min = Math.min(min, this.minimax(state.apply(currMove), depth - 1));
+            });
+            return min;
+        }
     }
 }
 const g = new Game();
