@@ -84,11 +84,24 @@ class State {
     const moves: Move[] = [];
     const currPlayer = this.players[this.currentPlayerIndex];
     const currHand = this.state[this.currentPlayerIndex];
+    const otherHand = this.state[this.getNextPlayerIndex()];
 
-    moves.push(new Move(currPlayer, "left", "left", currHand.left));
-    moves.push(new Move(currPlayer, "left", "right", currHand.left));
-    moves.push(new Move(currPlayer, "right", "left", currHand.right));
-    moves.push(new Move(currPlayer, "right", "right", currHand.right));
+    if (currHand.left !== 0) {
+      if (otherHand.left !== 0) {
+        moves.push(new Move(currPlayer, "left", "left", currHand.left));
+      }
+      if (otherHand.right !== 0) {
+        moves.push(new Move(currPlayer, "left", "right", currHand.left));
+      }
+    }
+    if (currHand.right !== 0) {
+      if (otherHand.left !== 0) {
+        moves.push(new Move(currPlayer, "right", "left", currHand.right));
+      }
+      if (otherHand.right !== 0) {
+        moves.push(new Move(currPlayer, "right", "right", currHand.right));
+      }
+    }
 
     return moves;
   }

@@ -67,10 +67,23 @@ var State = /** @class */ (function () {
         var moves = [];
         var currPlayer = this.players[this.currentPlayerIndex];
         var currHand = this.state[this.currentPlayerIndex];
-        moves.push(new Move(currPlayer, "left", "left", currHand.left));
-        moves.push(new Move(currPlayer, "left", "right", currHand.left));
-        moves.push(new Move(currPlayer, "right", "left", currHand.right));
-        moves.push(new Move(currPlayer, "right", "right", currHand.right));
+        var otherHand = this.state[this.getNextPlayerIndex()];
+        if (currHand.left !== 0) {
+            if (otherHand.left !== 0) {
+                moves.push(new Move(currPlayer, "left", "left", currHand.left));
+            }
+            if (otherHand.right !== 0) {
+                moves.push(new Move(currPlayer, "left", "right", currHand.left));
+            }
+        }
+        if (currHand.right !== 0) {
+            if (otherHand.left !== 0) {
+                moves.push(new Move(currPlayer, "right", "left", currHand.right));
+            }
+            if (otherHand.right !== 0) {
+                moves.push(new Move(currPlayer, "right", "right", currHand.right));
+            }
+        }
         return moves;
     };
     State.prototype.getNextPlayerIndex = function () {
