@@ -1,3 +1,5 @@
+import * as readline from "readline";
+
 class Player {
   name: string;
   index: number;
@@ -132,14 +134,23 @@ class State {
 }
 
 class Game {
-  play(): void {}
+  play(): void {
+    // const rl = readline.createInterface({
+    //   input: process.stdin,
+    //   output: process.stdout
+    // });
+    // rl.question("Hi. ", (answer) => {
+    //   console.log(answer);
+    //   rl.close();
+    // });
+  }
 
   getBestMove(state: State): Move {
     const moves = state.getMoves();
     let bestMove: Move;
     let bestUtility = Number.MIN_SAFE_INTEGER;
-    moves.forEach((currMove, index) => {
-      let currUtility = this.minimax(state.testMove(currMove), 2);
+    moves.forEach((currMove, _index) => {
+      const currUtility = this.minimax(state.testMove(currMove), 2);
       if (currUtility > bestUtility) {
         bestUtility = currUtility;
         bestMove = currMove;
@@ -159,13 +170,13 @@ class Game {
     const moves = state.getMoves();
     if (state.isAiPlayer()) {
       let max = Number.MIN_SAFE_INTEGER;
-      moves.forEach((currMove, index) => {
+      moves.forEach((currMove, _index) => {
         max = Math.max(max, this.minimax(state.testMove(currMove), depth - 1));
       });
       return max;
     } else {
       let min = Number.MAX_SAFE_INTEGER;
-      moves.forEach((currMove, index) => {
+      moves.forEach((currMove, _index) => {
         min = Math.min(min, this.minimax(state.testMove(currMove), depth - 1));
       });
       return min;

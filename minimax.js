@@ -1,25 +1,30 @@
-class Player {
-    constructor(name, index) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var Player = /** @class */ (function () {
+    function Player(name, index) {
         this.name = name;
         this.index = index;
     }
-}
-class Hands {
-    constructor(left = 1, right = 1) {
+    return Player;
+}());
+var Hands = /** @class */ (function () {
+    function Hands(left, right) {
+        if (left === void 0) { left = 1; }
+        if (right === void 0) { right = 1; }
         this.left = left;
         this.right = right;
     }
-    applyMove(move) {
-        const newValue = (this[move.to] + move.number) % (Hands.MAX_VALUE + 1);
+    Hands.prototype.applyMove = function (move) {
+        var newValue = (this[move.to] + move.number) % (Hands.MAX_VALUE + 1);
         this[move.to] = newValue;
-    }
-    duplicate() {
+    };
+    Hands.prototype.duplicate = function () {
         return new Hands(this.left, this.right);
-    }
-    isLost() {
+    };
+    Hands.prototype.isLost = function () {
         return this.left === 0 && this.right === 0;
-    }
-    utility() {
+    };
+    Hands.prototype.utility = function () {
         if (this.left === 0 && this.right === 0) {
             return -10;
         }
@@ -32,19 +37,23 @@ class Hands {
         else {
             return 0;
         }
-    }
-}
-Hands.MAX_VALUE = 5;
-class Move {
-    constructor(player, from, to, number) {
+    };
+    Hands.MAX_VALUE = 5;
+    return Hands;
+}());
+var Move = /** @class */ (function () {
+    function Move(player, from, to, number) {
         this.player = player;
         this.from = from;
         this.to = to;
         this.number = number;
     }
-}
-class State {
-    constructor(hand1 = new Hands(), hand2 = new Hands()) {
+    return Move;
+}());
+var State = /** @class */ (function () {
+    function State(hand1, hand2) {
+        if (hand1 === void 0) { hand1 = new Hands(); }
+        if (hand2 === void 0) { hand2 = new Hands(); }
         this.state = [hand1, hand2];
         this.humanPlayer = new Player("simon", 0);
         this.aiPlayer = new Player("ai", 1);
@@ -53,83 +62,98 @@ class State {
         this.players[this.aiPlayer.index] = this.aiPlayer;
         this.currentPlayerIndex = 0;
     }
-    getMoves() {
-        const moves = [];
-        const currPlayer = this.players[this.currentPlayerIndex];
-        const currHand = this.state[this.currentPlayerIndex];
+    State.prototype.getMoves = function () {
+        var moves = [];
+        var currPlayer = this.players[this.currentPlayerIndex];
+        var currHand = this.state[this.currentPlayerIndex];
         moves.push(new Move(currPlayer, "left", "left", currHand.left));
         moves.push(new Move(currPlayer, "left", "right", currHand.left));
         moves.push(new Move(currPlayer, "right", "left", currHand.right));
         moves.push(new Move(currPlayer, "right", "right", currHand.right));
         return moves;
-    }
-    getNextPlayerIndex() {
+    };
+    State.prototype.getNextPlayerIndex = function () {
         return (this.currentPlayerIndex + 1) % this.players.length;
-    }
-    isAiPlayer() {
+    };
+    State.prototype.isAiPlayer = function () {
         return this.currentPlayerIndex === this.aiPlayer.index;
-    }
-    testMove(move) {
-        const newState = new State();
-        newState.state = this.state.map((value) => value.duplicate());
+    };
+    State.prototype.testMove = function (move) {
+        var newState = new State();
+        newState.state = this.state.map(function (value) { return value.duplicate(); });
         newState.state[this.getNextPlayerIndex()].applyMove(move);
         newState.players = this.players;
         newState.humanPlayer = this.humanPlayer;
         newState.aiPlayer = this.aiPlayer;
         newState.currentPlayerIndex = this.getNextPlayerIndex();
         return newState;
-    }
-    applyMove(move) {
-        const nextPlayerIndex = this.getNextPlayerIndex();
+    };
+    State.prototype.applyMove = function (move) {
+        var nextPlayerIndex = this.getNextPlayerIndex();
         this.state[nextPlayerIndex].applyMove(move);
         this.currentPlayerIndex = nextPlayerIndex;
-    }
-    isTerminal() {
+    };
+    State.prototype.isTerminal = function () {
         return this.state[0].isLost() || this.state[1].isLost();
-    }
-    utility() {
-        const humanUtility = this.state[this.humanPlayer.index].utility() * -1;
-        const aiUtility = this.state[this.aiPlayer.index].utility() * 1.2;
+    };
+    State.prototype.utility = function () {
+        var humanUtility = this.state[this.humanPlayer.index].utility() * -1;
+        var aiUtility = this.state[this.aiPlayer.index].utility() * 1.2;
         return humanUtility + aiUtility;
+    };
+    return State;
+}());
+var Game = /** @class */ (function () {
+    function Game() {
     }
-}
-class Game {
-    play() { }
-    getBestMove(state) {
-        const moves = state.getMoves();
-        let bestMove;
-        let bestUtility = Number.MIN_SAFE_INTEGER;
-        moves.forEach((currMove, index) => {
-            let currUtility = this.minimax(state.testMove(currMove), 2);
+    Game.prototype.play = function () {
+        // const rl = readline.createInterface({
+        //   input: process.stdin,
+        //   output: process.stdout
+        // });
+        // rl.question("Hi. ", (answer) => {
+        //   console.log(answer);
+        //   rl.close();
+        // });
+    };
+    Game.prototype.getBestMove = function (state) {
+        var _this = this;
+        var moves = state.getMoves();
+        var bestMove;
+        var bestUtility = Number.MIN_SAFE_INTEGER;
+        moves.forEach(function (currMove, _index) {
+            var currUtility = _this.minimax(state.testMove(currMove), 2);
             if (currUtility > bestUtility) {
                 bestUtility = currUtility;
                 bestMove = currMove;
             }
         });
-        console.log(`Chose this move with the utility ${bestUtility}`);
+        console.log("Chose this move with the utility " + bestUtility);
         console.log(bestMove);
         return bestMove;
-    }
-    minimax(state, depth) {
+    };
+    Game.prototype.minimax = function (state, depth) {
+        var _this = this;
         if (depth === 0 || state.isTerminal()) {
             return state.utility();
         }
-        const moves = state.getMoves();
+        var moves = state.getMoves();
         if (state.isAiPlayer()) {
-            let max = Number.MIN_SAFE_INTEGER;
-            moves.forEach((currMove, index) => {
-                max = Math.max(max, this.minimax(state.testMove(currMove), depth - 1));
+            var max_1 = Number.MIN_SAFE_INTEGER;
+            moves.forEach(function (currMove, _index) {
+                max_1 = Math.max(max_1, _this.minimax(state.testMove(currMove), depth - 1));
             });
-            return max;
+            return max_1;
         }
         else {
-            let min = Number.MAX_SAFE_INTEGER;
-            moves.forEach((currMove, index) => {
-                min = Math.min(min, this.minimax(state.testMove(currMove), depth - 1));
+            var min_1 = Number.MAX_SAFE_INTEGER;
+            moves.forEach(function (currMove, _index) {
+                min_1 = Math.min(min_1, _this.minimax(state.testMove(currMove), depth - 1));
             });
-            return min;
+            return min_1;
         }
-    }
-}
-const g = new Game();
+    };
+    return Game;
+}());
+var g = new Game();
 g.play();
