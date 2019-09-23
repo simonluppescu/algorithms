@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var readline = require("readline");
 var Player = /** @class */ (function () {
     function Player(name, index) {
         this.name = name;
@@ -101,20 +102,61 @@ var State = /** @class */ (function () {
         var aiUtility = this.state[this.aiPlayer.index].utility() * 1.2;
         return humanUtility + aiUtility;
     };
+    State.prototype.print = function () {
+        var humanHands = this.state[this.humanPlayer.index];
+        var aiHands = this.state[this.aiPlayer.index];
+        console.log("Player: " + this.humanPlayer.name + "\nL R\n" + humanHands.left + " " + humanHands.right);
+        console.log("AI: " + this.aiPlayer.name + "\nL R\n" + aiHands.left + " " + aiHands.right);
+    };
     return State;
 }());
 var Game = /** @class */ (function () {
     function Game() {
+        this.state = new State();
     }
     Game.prototype.play = function () {
-        // const rl = readline.createInterface({
-        //   input: process.stdin,
-        //   output: process.stdout
-        // });
-        // rl.question("Hi. ", (answer) => {
-        //   console.log(answer);
-        //   rl.close();
-        // });
+        var _this = this;
+        var rl = readline.createInterface({
+            input: process.stdin,
+            output: process.stdout
+        });
+        rl.setPrompt("Enter your move> ");
+        this.state.print();
+        rl.prompt();
+        rl.on("line", function (line) {
+            var _a = _this.state.state[_this.state.currentPlayerIndex], left = _a.left, right = _a.right;
+            var move;
+            switch (line.trim()) {
+                case "LL":
+                    move = new Move(_this.state.humanPlayer, "left", "left", left);
+                    break;
+                case "LR":
+                    move = new Move(_this.state.humanPlayer, "left", "right", left);
+                    break;
+                case "RL":
+                    move = new Move(_this.state.humanPlayer, "right", "left", right);
+                    break;
+                case "RR":
+                    move = new Move(_this.state.humanPlayer, "right", "right", right);
+                    break;
+                default:
+                    console.error("Invalid command");
+                    return;
+            }
+            _this.state.applyMove(move);
+            _this.state.print();
+            var aiMove = _this.getBestMove(_this.state);
+            console.log("AI moves: " + aiMove.from + " to " + aiMove.to + " with value " + aiMove.number);
+            _this.state.applyMove(aiMove);
+            _this.state.print();
+            if (_this.state.isTerminal()) {
+                console.log("Game over!");
+                rl.close();
+            }
+            else {
+                rl.prompt();
+            }
+        });
     };
     Game.prototype.getBestMove = function (state) {
         var _this = this;
@@ -128,8 +170,8 @@ var Game = /** @class */ (function () {
                 bestMove = currMove;
             }
         });
-        console.log("Chose this move with the utility " + bestUtility);
-        console.log(bestMove);
+        // console.log(`Chose this move with the utility ${bestUtility}`);
+        // console.log(bestMove);
         return bestMove;
     };
     Game.prototype.minimax = function (state, depth) {

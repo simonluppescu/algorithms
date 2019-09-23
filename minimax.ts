@@ -131,18 +131,67 @@ class State {
 
     return humanUtility + aiUtility;
   }
+
+  print(): void {
+    const humanHands = this.state[this.humanPlayer.index];
+    const aiHands = this.state[this.aiPlayer.index];
+    console.log(`Player: ${this.humanPlayer.name}\nL R\n${humanHands.left} ${humanHands.right}`);
+    console.log(`AI: ${this.aiPlayer.name}\nL R\n${aiHands.left} ${aiHands.right}`);
+  }
 }
 
 class Game {
+  state: State;
+
+  constructor() {
+    this.state = new State();
+  }
+
   play(): void {
-    // const rl = readline.createInterface({
-    //   input: process.stdin,
-    //   output: process.stdout
-    // });
-    // rl.question("Hi. ", (answer) => {
-    //   console.log(answer);
-    //   rl.close();
-    // });
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    rl.setPrompt("Enter your move> ");
+
+    this.state.print();
+    rl.prompt();
+    rl.on("line", (line: string) => {
+      const { left, right } = this.state.state[this.state.currentPlayerIndex];
+      let move: Move;
+      switch (line.trim()) {
+        case "LL":
+          move = new Move(this.state.humanPlayer, "left", "left", left);
+          break;
+        case "LR":
+          move = new Move(this.state.humanPlayer, "left", "right", left);
+          break;
+        case "RL":
+          move = new Move(this.state.humanPlayer, "right", "left", right);
+          break;
+        case "RR":
+          move = new Move(this.state.humanPlayer, "right", "right", right);
+          break;
+        default:
+          console.error("Invalid command");
+          return;
+      }
+      this.state.applyMove(move);
+      this.state.print();
+
+      const aiMove = this.getBestMove(this.state);
+      console.log(`AI moves: ${aiMove.from} to ${aiMove.to} with value ${aiMove.number}`);
+      this.state.applyMove(aiMove);
+      this.state.print();
+
+      if (this.state.isTerminal()) {
+        console.log("Game over!");
+        rl.close();
+      } else {
+        rl.prompt();
+      }
+    });
   }
 
   getBestMove(state: State): Move {
@@ -157,8 +206,8 @@ class Game {
       }
     });
 
-    console.log(`Chose this move with the utility ${bestUtility}`);
-    console.log(bestMove);
+    // console.log(`Chose this move with the utility ${bestUtility}`);
+    // console.log(bestMove);
     return bestMove;
   }
 
