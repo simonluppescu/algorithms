@@ -193,6 +193,12 @@ class Game {
       this.state.applyMove(move);
       this.state.print();
 
+      if (this.state.isTerminal()) {
+        console.log("Game over!");
+        rl.close();
+        return;
+      }
+
       const aiMove = this.getBestMove(this.state);
       console.log(`AI moves: ${aiMove.from} to ${aiMove.to} with value ${aiMove.number}`);
       this.state.applyMove(aiMove);

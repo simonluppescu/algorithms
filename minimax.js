@@ -158,6 +158,11 @@ var Game = /** @class */ (function () {
             }
             _this.state.applyMove(move);
             _this.state.print();
+            if (_this.state.isTerminal()) {
+                console.log("Game over!");
+                rl.close();
+                return;
+            }
             var aiMove = _this.getBestMove(_this.state);
             console.log("AI moves: " + aiMove.from + " to " + aiMove.to + " with value " + aiMove.number);
             _this.state.applyMove(aiMove);
