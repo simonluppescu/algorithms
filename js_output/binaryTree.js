@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var BinaryTree = /** @class */ (function () {
     function BinaryTree(root) {
-        if (root === void 0) { root = new BinaryTreeNode("foo", null, null); }
+        if (root === void 0) { root = new BinaryTreeNode(0, null, null); }
         this.root = root;
     }
     BinaryTree.prototype.print = function () {

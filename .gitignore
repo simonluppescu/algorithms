@@ -1,3 +1,6 @@
 .idea
 .vscode
 node_modules
+
+sandbox
+js_output/sandbox
