@@ -4,7 +4,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 var assert = require("assert");
-var binaryTree_1 = require("./binaryTree");
+var binaryTree_1 = require("./utils/binaryTree");
 function isBST(bt) {
     var node = bt.root;
     return compareLeft(node.value, node.left) && compareRight(node.value, node.right);

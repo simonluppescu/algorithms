@@ -4,7 +4,7 @@
 
 import * as assert from "assert";
 
-import BinaryTree, { BinaryTreeNode } from "./binaryTree";
+import BinaryTree, { BinaryTreeNode } from "./utils/binaryTree";
 
 function isBST(bt: BinaryTree): boolean {
   const node = bt.root;

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var binaryTree_1 = require("./binaryTree");
+var binaryTree_1 = require("./utils/binaryTree");
 /**
  * This algorithm is not optimal because it looks through nodes multiple times.
  */

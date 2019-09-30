@@ -1,4 +1,4 @@
-import BinaryTree, { BinaryTreeNode } from "./binaryTree";
+import BinaryTree, { BinaryTreeNode } from "./utils/binaryTree";
 
 /**
  * This algorithm is not optimal because it looks through nodes multiple times.
