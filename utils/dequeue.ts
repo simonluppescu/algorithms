@@ -1,45 +1,47 @@
 class Dequeue {
+  array: any[];
+
   constructor() {
     this.array = [];
   }
 
-  pushFront(value) {
+  pushFront(value: any): void {
     this.array.splice(0, 0, value);
   }
 
-  popFront() {
+  popFront(): any {
     return this.array.splice(0, 1);
   }
 
-  peekFront() {
+  peekFront(): any {
     return this.array[0];
   }
 
-  pushBack(value) {
+  pushBack(value: any): void {
     this.array.push(value);
   }
 
-  popBack() {
+  popBack(): any {
     return this.array.pop();
   }
 
-  peekBack() {
+  peekBack(): any {
     return this.array[this.array.length - 1];
   }
 
-  clear() {
+  clear(): void {
     while (!this.isEmpty()) {
       this.popFront();
     }
   }
 
-  length() {
+  length(): number {
     return this.array.length;
   }
 
-  isEmpty() {
+  isEmpty(): boolean {
     return this.length() === 0;
   }
 }
 
-module.exports = Dequeue;
+export default Dequeue;

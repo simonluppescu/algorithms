@@ -1,6 +1,6 @@
-const assert = require("assert");
+import * as assert from "assert";
 
-function assertArrayEquals(array1, array2) {
+function assertArrayEquals(array1: any[], array2: any[]): void {
   assert(array1.length === array2.length);
 
   for (let i = 0; i < array1.length; i++) {
@@ -9,4 +9,4 @@ function assertArrayEquals(array1, array2) {
   console.log(`Assertion: ${array1} PASSED.`);
 }
 
-module.exports = assertArrayEquals;
+export default assertArrayEquals;

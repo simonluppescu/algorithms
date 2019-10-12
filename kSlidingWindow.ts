@@ -1,8 +1,14 @@
-const assertArrayEquals = require("./utils/assertArray");
-const Dequeue = require("./utils/dequeue");
+import assertArrayEquals from "./utils/assertArray";
+import Dequeue from "./utils/dequeue";
 
 class Slider {
-  constructor(arr, windowSize) {
+  array: number[];
+  k: number;
+
+  queue: Dequeue;
+  maxArray: number[];
+
+  constructor(arr: number[], windowSize: number) {
     this.array = arr;
     this.k = windowSize;
 
@@ -10,7 +16,7 @@ class Slider {
     this.maxArray = [];
   }
 
-  run() {
+  run(): number[] {
     for (let i = 0; i < this.array.length; i++) {
       const currValue = this.array[i];
       console.log(`Current value is ${currValue}`); // CONSOLE LOG ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -54,7 +60,7 @@ class Slider {
     return this.maxArray;
   }
 
-  addMax() {
+  addMax(): void {
     this.maxArray.push(this.array[this.queue.peekFront()]);
   }
 }
