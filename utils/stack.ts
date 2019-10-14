@@ -1,19 +1,19 @@
-class Stack {
-  private stack: any[];
+class Stack<T> {
+  private stack: T[];
 
   constructor() {
-    this.stack = [];
+    this.stack = new Array<T>();
   }
 
-  push(val): void {
+  push(val: T): void {
     this.stack.push(val);
   }
 
-  pop(): any {
+  pop(): T {
     return this.stack.pop();
   }
 
-  peek(): any {
+  peek(): T {
     return this.stack[this.stack.length - 1];
   }
 

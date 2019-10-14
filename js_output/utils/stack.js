@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Stack = /** @class */ (function () {
     function Stack() {
-        this.stack = [];
+        this.stack = new Array();
     }
     Stack.prototype.push = function (val) {
         this.stack.push(val);
