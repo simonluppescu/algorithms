@@ -1,5 +1,5 @@
 class Stack<T> {
-  private stack: T[];
+  protected stack: T[];
 
   constructor() {
     this.stack = new Array<T>();
