@@ -5,7 +5,7 @@ class BinaryTree {
     this.root = root;
   }
 
-  print(): void {
+  printValues(): void {
     const printNode = (node: BinaryTreeNode): void => {
       if (node.left) printNode(node.left);
       console.log(node.value);
@@ -13,6 +13,20 @@ class BinaryTree {
     };
 
     printNode(this.root);
+  }
+
+  printNodes(): void {
+    const printNode = (node: BinaryTreeNode, depth = 0): string => {
+      const spacing = new Array(depth * 2).fill(" ").join("");
+      return `
+BinaryTreeNode {
+${spacing}  value: ${node.value}
+${spacing}  left: ${node.hasLeft() ? printNode(node.left, depth + 1) : "null"}
+${spacing}  right: ${node.hasRight() ? printNode(node.right, depth + 1) : "null"}
+${spacing}}`.trim();
+    };
+
+    console.log(printNode(this.root));
   }
 
   static randomBST(): BinaryTree {

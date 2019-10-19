@@ -5,7 +5,7 @@ var BinaryTree = /** @class */ (function () {
         if (root === void 0) { root = new BinaryTreeNode(0, null, null); }
         this.root = root;
     }
-    BinaryTree.prototype.print = function () {
+    BinaryTree.prototype.printValues = function () {
         var printNode = function (node) {
             if (node.left)
                 printNode(node.left);
@@ -14,6 +14,14 @@ var BinaryTree = /** @class */ (function () {
                 printNode(node.right);
         };
         printNode(this.root);
+    };
+    BinaryTree.prototype.printNodes = function () {
+        var printNode = function (node, depth) {
+            if (depth === void 0) { depth = 0; }
+            var spacing = new Array(depth * 2).fill(" ").join("");
+            return ("\nBinaryTreeNode {\n" + spacing + "  value: " + node.value + "\n" + spacing + "  left: " + (node.hasLeft() ? printNode(node.left, depth + 1) : "null") + "\n" + spacing + "  right: " + (node.hasRight() ? printNode(node.right, depth + 1) : "null") + "\n" + spacing + "}").trim();
+        };
+        console.log(printNode(this.root));
     };
     BinaryTree.randomBST = function () {
         var root = new BinaryTreeNode(50, null, null);
