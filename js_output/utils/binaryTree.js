@@ -15,6 +15,34 @@ var BinaryTree = /** @class */ (function () {
         };
         printNode(this.root);
     };
+    BinaryTree.randomBST = function () {
+        var root = new BinaryTreeNode(50, null, null);
+        for (var i = 0; i < 25; i++) {
+            var value = Math.floor(Math.random() * 100) + 1;
+            var currNode = root;
+            while (true) {
+                if (value < currNode.value) {
+                    if (!currNode.hasLeft()) {
+                        currNode.left = new BinaryTreeNode(value, null, null);
+                        break;
+                    }
+                    else {
+                        currNode = currNode.left;
+                    }
+                }
+                else if (value >= currNode.value) {
+                    if (!currNode.hasRight()) {
+                        currNode.right = new BinaryTreeNode(value, null, null);
+                        break;
+                    }
+                    else {
+                        currNode = currNode.right;
+                    }
+                }
+            }
+        }
+        return new BinaryTree(root);
+    };
     BinaryTree.generateBST = function () {
         var left = new BinaryTreeNode(3, new BinaryTreeNode(2, new BinaryTreeNode(1, null, null), null), new BinaryTreeNode(4, null, null));
         var right = new BinaryTreeNode(8, new BinaryTreeNode(6, null, null), new BinaryTreeNode(9, null, null));
@@ -36,6 +64,15 @@ var BinaryTreeNode = /** @class */ (function () {
         this.right = right;
         this.isVisited = false;
     }
+    BinaryTreeNode.prototype.hasLeft = function () {
+        return this.left && !this.left.isVisited;
+    };
+    BinaryTreeNode.prototype.hasRight = function () {
+        return this.right && !this.right.isVisited;
+    };
+    BinaryTreeNode.prototype.visit = function () {
+        this.isVisited = true;
+    };
     return BinaryTreeNode;
 }());
 exports.BinaryTreeNode = BinaryTreeNode;

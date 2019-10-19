@@ -15,6 +15,35 @@ class BinaryTree {
     printNode(this.root);
   }
 
+  static randomBST(): BinaryTree {
+    const root = new BinaryTreeNode(50, null, null);
+
+    for (let i = 0; i < 25; i++) {
+      const value = Math.floor(Math.random() * 100) + 1;
+      let currNode = root;
+
+      while (true) {
+        if (value < currNode.value) {
+          if (!currNode.hasLeft()) {
+            currNode.left = new BinaryTreeNode(value, null, null);
+            break;
+          } else {
+            currNode = currNode.left;
+          }
+        } else if (value >= currNode.value) {
+          if (!currNode.hasRight()) {
+            currNode.right = new BinaryTreeNode(value, null, null);
+            break;
+          } else {
+            currNode = currNode.right;
+          }
+        }
+      }
+    }
+
+    return new BinaryTree(root);
+  }
+
   static generateBST(): BinaryTree {
     const left = new BinaryTreeNode(
       3,
@@ -54,6 +83,18 @@ export class BinaryTreeNode {
     this.right = right;
 
     this.isVisited = false;
+  }
+
+  hasLeft(): boolean {
+    return this.left && !this.left.isVisited;
+  }
+
+  hasRight(): boolean {
+    return this.right && !this.right.isVisited;
+  }
+
+  visit(): void {
+    this.isVisited = true;
   }
 }
 
