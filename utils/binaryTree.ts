@@ -46,11 +46,14 @@ export class BinaryTreeNode {
   value: number;
   left: BinaryTreeNode;
   right: BinaryTreeNode;
+  isVisited: boolean;
 
   constructor(value: number, left: BinaryTreeNode, right: BinaryTreeNode) {
     this.value = value;
     this.left = left;
     this.right = right;
+
+    this.isVisited = false;
   }
 }
 

@@ -34,6 +34,7 @@ var BinaryTreeNode = /** @class */ (function () {
         this.value = value;
         this.left = left;
         this.right = right;
+        this.isVisited = false;
     }
     return BinaryTreeNode;
 }());
