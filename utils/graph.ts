@@ -1,5 +1,3 @@
-import * as assert from "assert";
-
 class Graph {
   edges: { [val: number]: { [val2: number]: number } };
   root: GraphNode;
@@ -62,7 +60,9 @@ class Graph {
   }
 }
 
-class GraphNode {
+export default Graph;
+
+export class GraphNode {
   adjacents: GraphNode[];
   visited: boolean;
   value: string;
@@ -77,9 +77,3 @@ class GraphNode {
     this.visited = true;
   }
 }
-
-const g = Graph.generateForDijkstra();
-
-assert(g.includes("Tokyo") === true);
-assert(g.includes("Hi") === false);
-console.log("Assertions passed for includes()");

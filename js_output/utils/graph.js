@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var assert = require("assert");
 var Graph = /** @class */ (function () {
     function Graph(root) {
         this.edges = {};
@@ -53,6 +52,7 @@ var Graph = /** @class */ (function () {
     };
     return Graph;
 }());
+exports.default = Graph;
 var GraphNode = /** @class */ (function () {
     function GraphNode(value) {
         this.value = value;
@@ -64,7 +64,4 @@ var GraphNode = /** @class */ (function () {
     };
     return GraphNode;
 }());
-var g = Graph.generateForDijkstra();
-assert(g.includes("Tokyo") === true);
-assert(g.includes("Hi") === false);
-console.log("Assertions passed for includes()");
+exports.GraphNode = GraphNode;
