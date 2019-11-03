@@ -1,3 +1,9 @@
+/**
+ * Category: RECURSION
+ * Tags: recursion simple math
+ *
+ * Multiply two numbers without using multiply operator.
+ */
 function multiply(num1: number, num2: number): number {
   return multiplyHelper(num1, num1, num2 - 1);
 }

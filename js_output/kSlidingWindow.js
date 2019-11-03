@@ -1,5 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Category: ARRAYS
+ * Tags: queues algorithms
+ *
+ * Given an array of integers, keep the maximum number in a continuously sliding subset of the array of size K.
+ * For example, given array 4 3 2 5 4 3 2 1, the result is 4 5 5 5 4 3.
+ */
 var assertArray_1 = require("./utils/assertArray");
 var dequeue_1 = require("./utils/dequeue");
 var Slider = /** @class */ (function () {

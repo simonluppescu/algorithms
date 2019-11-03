@@ -1,5 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Category: GRAPHS
+ * Tags: algorithms search queues
+ *
+ * Breadth First Search of a graph. Keeps track of visited nodes.
+ */
 var graph_1 = require("./utils/graph");
 var queue_1 = require("./utils/queue");
 var assert = require("assert");

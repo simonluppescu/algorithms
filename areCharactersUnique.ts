@@ -1,4 +1,10 @@
-// Determine if every character in a string is unique
+/**
+ * Category: STRINGS
+ * Tags: maps simple easy
+ *
+ * Determine if every character in a string is unique
+ */
+
 import * as assert from "assert";
 
 function isUnique(str): boolean {

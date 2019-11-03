@@ -1,5 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Category: TREES
+ * Tags: algorithms iteration
+ *
+ * Depth first search but perform iteratively.
+ */
 var binaryTree_1 = require("./utils/binaryTree");
 var stack_1 = require("./utils/stack");
 var IterativeDFS = /** @class */ (function () {

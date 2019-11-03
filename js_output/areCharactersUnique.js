@@ -1,6 +1,11 @@
 "use strict";
+/**
+ * Category: STRINGS
+ * Tags: maps simple easy
+ *
+ * Determine if every character in a string is unique
+ */
 Object.defineProperty(exports, "__esModule", { value: true });
-// Determine if every character in a string is unique
 var assert = require("assert");
 function isUnique(str) {
     var characters = {};

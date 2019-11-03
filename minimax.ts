@@ -1,3 +1,7 @@
+/**
+ * Category: RECURSION
+ * Tags: recursion trees difficult oop
+ */
 import * as readline from "readline";
 
 class Player {

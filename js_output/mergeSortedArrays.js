@@ -1,5 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Category: ARRAYS
+ * Tags: sorting two_indices
+ *
+ * Merge two sorted arrays into one sorted array.
+ */
 var assertArray_1 = require("./utils/assertArray");
 function mergeSortedArrayDel(arr1, arr2) {
     var result = [];

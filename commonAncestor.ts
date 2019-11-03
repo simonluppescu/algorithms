@@ -1,6 +1,10 @@
 import BinaryTree, { BinaryTreeNode } from "./utils/binaryTree";
 
 /**
+ * Category: TREES
+ * Tags: recursion
+ *
+ * Given two different nodes in a tree, find the common ancestor.
  * This algorithm is not optimal because it looks through nodes multiple times.
  */
 class Finder {

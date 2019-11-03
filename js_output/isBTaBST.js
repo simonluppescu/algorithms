@@ -1,5 +1,8 @@
 "use strict";
 /**
+ * Category: TREES
+ * Tags: binary_search_trees recursion
+ *
  * Check if a Binary Tree is a Binary Search Tree
  */
 Object.defineProperty(exports, "__esModule", { value: true });

@@ -1,4 +1,9 @@
-// Determine if two strings are permutations (rearrangements of the letters) of each other
+/**
+ * Category: STRINGS
+ * Tags: iteration maps
+ *
+ * Determine if two strings are permutations (rearrangements of the letters) of each other.
+ */
 import * as assert from "assert";
 
 function isPermutation(str1, str2): boolean {

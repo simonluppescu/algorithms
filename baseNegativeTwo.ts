@@ -1,4 +1,7 @@
 /**
+ * Category: BIT_MANIPULATION
+ * Tags: bits math exponents
+ *
  * In base -2, each digit is a power of -2:
  * ... -32 16 -8 4 -2 1
  * so the number 9 would be 11001 in base -2.

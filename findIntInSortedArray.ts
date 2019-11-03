@@ -1,3 +1,9 @@
+/**
+ * Category: ARRAYS
+ * Tags: binary_search sorted_arrays
+ *
+ * Given a sorted array of integers, find the index of a number.
+ */
 import * as assert from "assert";
 
 class Searcher {

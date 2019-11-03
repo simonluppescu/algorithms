@@ -2,6 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var binaryTree_1 = require("./utils/binaryTree");
 /**
+ * Category: TREES
+ * Tags: recursion
+ *
+ * Given two different nodes in a tree, find the common ancestor.
  * This algorithm is not optimal because it looks through nodes multiple times.
  */
 var Finder = /** @class */ (function () {

@@ -1,5 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Category: ARRAYS
+ * Tags: binary_search sorted_arrays
+ *
+ * Given a sorted array of integers, find the index of a number.
+ */
 var assert = require("assert");
 var Searcher = /** @class */ (function () {
     function Searcher(array) {

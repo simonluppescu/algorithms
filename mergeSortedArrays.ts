@@ -1,3 +1,9 @@
+/**
+ * Category: ARRAYS
+ * Tags: sorting two_indices
+ *
+ * Merge two sorted arrays into one sorted array.
+ */
 import assertArray from "./utils/assertArray";
 
 function mergeSortedArrayDel(arr1: number[], arr2: number[]): number[] {

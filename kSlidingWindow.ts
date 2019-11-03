@@ -1,3 +1,10 @@
+/**
+ * Category: ARRAYS
+ * Tags: queues algorithms
+ *
+ * Given an array of integers, keep the maximum number in a continuously sliding subset of the array of size K.
+ * For example, given array 4 3 2 5 4 3 2 1, the result is 4 5 5 5 4 3.
+ */
 import assertArrayEquals from "./utils/assertArray";
 import Dequeue from "./utils/dequeue";
 

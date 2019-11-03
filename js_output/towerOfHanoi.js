@@ -14,6 +14,9 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
+ * Category: RECURSION
+ * Tags: recursion oop sets
+ *
  * Solve the Tower of Hanoi game
  * Not the best implementation because of the recursive calls keeping track of the same
  * instance of the towers. Instead of duplicating them, it undos the move after the

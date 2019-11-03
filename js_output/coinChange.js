@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
+ * Category: DYNAMIC_PROGRAMMING
+ * Tags: recursion
+ *
  * Given a set of coins with numerical values, compute the minimum number of coins that are used to sum to a given amount.
  * For example, for coins 5, 2, 1, and an amount 8, the answer is 3 coins.
  */

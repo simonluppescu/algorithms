@@ -1,4 +1,7 @@
 /**
+ * Category: DYNAMIC_PROGRAMMING
+ * Tags: recursion maps algorithms
+ *
  * Given a set of objects, each of which has a weight and a monetary value,
  * put as many objects into a knapsack with a weight limit where the total value
  * of all the objects is the highest possible.

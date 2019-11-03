@@ -1,15 +1,18 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-/*
-A spider web is defined by
-
-"rings" numbered out from the centre as 0, 1, 2, 3, 4
-"radials" labelled clock-wise from the top as A, B, C, D, E, F, G, H
-
-For example the spider is at H3 and the fly is at E2.
-
-Your task is to calculate and return the distance the spider must jump to get to the fly.
-*/
+/**
+ * Category: MATH
+ * Tags: math oop
+ *
+ * A spider web is defined by
+ *
+ * "rings" numbered out from the centre as 0, 1, 2, 3, 4
+ * "radials" labelled clock-wise from the top as A, B, C, D, E, F, G, H
+ *
+ * For example the spider is at H3 and the fly is at E2.
+ *
+ * Your task is to calculate and return the distance the spider must jump to get to the fly.
+ */
 var assert = require("assert");
 var JumpDistanceCalculator = /** @class */ (function () {
     function JumpDistanceCalculator(spiderCoord, flyCoord) {

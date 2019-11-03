@@ -1,5 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Category: RECURSION
+ * Tags: recursion trees difficult oop
+ */
 var readline = require("readline");
 var Player = /** @class */ (function () {
     function Player(name, index) {

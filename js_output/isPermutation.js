@@ -1,6 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// Determine if two strings are permutations (rearrangements of the letters) of each other
+/**
+ * Category: STRINGS
+ * Tags: iteration maps
+ *
+ * Determine if two strings are permutations (rearrangements of the letters) of each other.
+ */
 var assert = require("assert");
 function isPermutation(str1, str2) {
     if (str1.length !== str2.length) {

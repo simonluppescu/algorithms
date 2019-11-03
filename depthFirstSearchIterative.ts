@@ -1,3 +1,9 @@
+/**
+ * Category: TREES
+ * Tags: algorithms iteration
+ *
+ * Depth first search but perform iteratively.
+ */
 import BinaryTree, { BinaryTreeNode } from "./utils/binaryTree";
 import Stack from "./utils/stack";
 
