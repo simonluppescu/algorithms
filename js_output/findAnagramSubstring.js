@@ -9,42 +9,48 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var assert = require("assert");
 var Solver = /** @class */ (function () {
     function Solver(s) {
-        this.str = s;
+        this.text = s;
     }
-    Solver.prototype.hasAnagramSubstring = function (small) {
-        var smallCharacters = new Map();
-        for (var i = 0; i < small.length; i++) {
-            var char = small[i];
-            if (!smallCharacters.has(char))
-                smallCharacters.set(char, 0);
-            smallCharacters.set(char, smallCharacters.get(char) + 1);
+    Solver.prototype.hasAnagramSubstring = function (pattern) {
+        if (pattern.length === 0)
+            return false; // <-- This might not be the correct way to handle empty patterns
+        if (pattern === this.text)
+            return true;
+        var patternCounts = new Map();
+        var windowCounts = new Map();
+        for (var i = 0; i < pattern.length; i++) {
+            var pChar = pattern[i];
+            if (!patternCounts.has(pChar))
+                patternCounts.set(pChar, 0);
+            patternCounts.set(pChar, patternCounts.get(pChar) + 1);
+            var tChar = this.text[i];
+            if (!windowCounts.has(tChar))
+                windowCounts.set(tChar, 0);
+            windowCounts.set(tChar, windowCounts.get(tChar) + 1);
         }
-        this.resetChecker(smallCharacters, small.length);
-        for (var i = 0; i < this.str.length; i++) {
-            var char = this.str[i];
-            // console.log(this.charChecker);
-            if (!this.charChecker.has(char)) {
-                this.resetChecker(smallCharacters, small.length);
-            }
-            else if (this.charChecker.get(char) === 0) {
-                this.resetChecker(smallCharacters, small.length);
-                i--;
-            }
-            else {
-                this.charChecker.set(char, this.charChecker.get(char) - 1);
-                this.charsLeft--;
-                if (this.isComplete())
-                    return true;
-            }
+        // console.log(patternCounts);
+        for (var i = pattern.length; i < this.text.length; i++) {
+            if (this.isComplete(patternCounts, windowCounts))
+                return true;
+            var newChar = this.text[i];
+            var firstChar = this.text[i - pattern.length];
+            if (!windowCounts.has(newChar))
+                windowCounts.set(newChar, 0);
+            windowCounts.set(newChar, windowCounts.get(newChar) + 1);
+            windowCounts.set(firstChar, windowCounts.get(firstChar) - 1);
         }
-        return false;
+        return this.isComplete(patternCounts, windowCounts);
     };
-    Solver.prototype.resetChecker = function (smallCharacters, numCharsSmall) {
-        this.charChecker = new Map(smallCharacters);
-        this.charsLeft = numCharsSmall;
-    };
-    Solver.prototype.isComplete = function () {
-        return this.charsLeft === 0;
+    Solver.prototype.isComplete = function (pCounts, windowCounts) {
+        // console.log(windowCounts);
+        for (var _i = 0, _a = Array.from(pCounts.entries()); _i < _a.length; _i++) {
+            var pair = _a[_i];
+            var char = pair[0];
+            var count = pair[1];
+            if (count !== windowCounts.get(char))
+                return false;
+        }
+        return true;
     };
     return Solver;
 }());
@@ -54,7 +60,10 @@ assert(solver.hasAnagramSubstring("saf"));
 assert(!solver.hasAnagramSubstring("sass"));
 assert(solver.hasAnagramSubstring("f"));
 assert(solver.hasAnagramSubstring("ssaaafsadsaaf"));
-var fastTester = new Solver("aksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsf");
+assert(solver.hasAnagramSubstring("afa"));
+assert(solver.hasAnagramSubstring("sasfas"));
+var fastTester = new Solver("aksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsfaksdfhkjasdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbhqwhsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashdusdfalksjdflkadsjfklahjkheghahskjdhgjhasndkbaspdfasdfhkjawhegashduerurofdasdlkfhaksjdfhkahsdkhaskjdvkjaskdkrhkasiefhahsdjkfjasjdfhhashdfkakjshdfhkaweogasdgfpasoieuaiowhfkajskdfspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbfweiufhkajfakjsf");
 assert(!fastTester.hasAnagramSubstring("wwei"));
 assert(fastTester.hasAnagramSubstring("asd"));
+assert(fastTester.hasAnagramSubstring("dfsuewjewberurofdspsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvdmkvdmsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvdmvjdshdfsuewjewbsdfhkjawhegashduerurofdspvdmkvd"));
 console.log("All assertions passed.");
