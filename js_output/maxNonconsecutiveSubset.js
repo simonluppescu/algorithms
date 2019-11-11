@@ -1,3 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Category: ARRAYS
+ * Tags: algorithms recursion iteration memoization
+ *
+ * Given an array of positive or negative integers, find the subset of the array where no two elements are adjacent
+ * and whose values sum to the greatest amount.
+ * For example, [-2, 1, 3, -4, 5], the subset is [3, 5] so the answer is 8.
+ */
+var assert = require("assert");
 var MaxSubsetSolver = /** @class */ (function () {
     function MaxSubsetSolver(arr) {
         this.array = arr;
@@ -36,6 +47,8 @@ var MaxSubsetSolver = /** @class */ (function () {
     };
     return MaxSubsetSolver;
 }());
-var ad = new MaxSubsetSolver([1, -4, -5, 6, -93, -2, 9, -13]);
-console.log(ad.solveIteratively());
-console.log(ad.solveRecursively());
+assert(new MaxSubsetSolver([1, -4, -5, 3, -2, -9, 5]).solveIteratively() === 9);
+assert(new MaxSubsetSolver([2, 2, 2, 2, 2]).solveIteratively() === 6);
+assert(new MaxSubsetSolver([-1, -1, -1, -1, 4, 3]).solveIteratively() === 4);
+assert(new MaxSubsetSolver([8]).solveIteratively() === 8);
+console.log("All assertions passed.");
