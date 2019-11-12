@@ -13,6 +13,12 @@ class Queue<T> {
     return this.array.splice(0, 1)[0];
   }
 
+  clear(): void {
+    while (!this.isEmpty()) {
+      this.dequeue();
+    }
+  }
+
   peek(): T {
     return this.array[0];
   }

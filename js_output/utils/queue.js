@@ -10,6 +10,11 @@ var Queue = /** @class */ (function () {
     Queue.prototype.dequeue = function () {
         return this.array.splice(0, 1)[0];
     };
+    Queue.prototype.clear = function () {
+        while (!this.isEmpty()) {
+            this.dequeue();
+        }
+    };
     Queue.prototype.peek = function () {
         return this.array[0];
     };
