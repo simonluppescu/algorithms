@@ -9,6 +9,14 @@ module.exports = {
     ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript features
     sourceType: "module", // Allows for the use of imports
   },
+  overrides: [
+    {
+      files: ["*.js"],
+      rules: {
+        "@typescript-eslint/explicit-function-return-type": "off"
+      }
+    }
+  ],
   rules: {
     indent: "off",
     "no-invalid-this": "off",
