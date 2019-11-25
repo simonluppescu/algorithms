@@ -3,6 +3,7 @@
     "target": "es5",
     "watch": true,
     "lib": ["dom", "es2017"],
-    "outDir": "js_output"
+    "outDir": "js_output",
+    "downlevelIteration": true
   }
 }

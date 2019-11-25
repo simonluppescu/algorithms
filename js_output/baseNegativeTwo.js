@@ -11,12 +11,25 @@
  * Input: 11001 (9)
  * Output: 101 (5)
  */
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __read = (this && this.__read) || function (o, n) {
+    var m = typeof Symbol === "function" && o[Symbol.iterator];
+    if (!m) return o;
+    var i = m.call(o), r, ar = [], e;
+    try {
+        while ((n === void 0 || n-- > 0) && !(r = i.next()).done) ar.push(r.value);
+    }
+    catch (error) { e = { error: error }; }
+    finally {
+        try {
+            if (r && !r.done && (m = i["return"])) m.call(i);
+        }
+        finally { if (e) throw e.error; }
+    }
+    return ar;
+};
+var __spread = (this && this.__spread) || function () {
+    for (var ar = [], i = 0; i < arguments.length; i++) ar = ar.concat(__read(arguments[i]));
+    return ar;
 };
 var NotOptimalSolver = /** @class */ (function () {
     function NotOptimalSolver(arr) {
@@ -69,8 +82,8 @@ var NotOptimalSolver = /** @class */ (function () {
         if (index === -1) {
             return sum === this.decimalOutput ? arr.slice(1) : null;
         }
-        var firstArr = __spreadArrays(arr, [1]);
-        var secondArr = __spreadArrays(arr, [0]);
+        var firstArr = __spread(arr, [1]);
+        var secondArr = __spread(arr, [0]);
         return (this.computeHelper(firstArr, index - 1, sum + this.bitValues[index]) ||
             this.computeHelper(secondArr, index - 1, sum));
     };
