@@ -1,3 +1,13 @@
+/**
+ * Category: RECURSION
+ * Tags: math
+ *
+ * Given a list of boxes, stack the boxes to get a maximum height where the box below must be greater in height, width, and depth.
+ * Return that max height.
+ */
+
+import * as assert from "assert";
+
 interface Box {
   width: number;
   depth: number;
@@ -47,4 +57,5 @@ const boxes: Array<Box> = [
   { width: 1, depth: 2, height: 1 }
 ];
 
-console.log(stacker.stack(boxes));
+assert(stacker.stack(boxes) === 5);
+console.log("All assertions passed.");

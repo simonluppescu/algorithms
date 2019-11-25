@@ -1,3 +1,13 @@
+"use strict";
+/**
+ * Category: RECURSION
+ * Tags: math
+ *
+ * Given a list of boxes, stack the boxes to get a maximum height where the box below must be greater in height, width, and depth.
+ * Return that max height.
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+var assert = require("assert");
 var Stacker = /** @class */ (function () {
     function Stacker() {
     }
@@ -40,4 +50,5 @@ var boxes = [
     { width: 5, depth: 5, height: 4 },
     { width: 1, depth: 2, height: 1 }
 ];
-console.log(stacker.stack(boxes));
+assert(stacker.stack(boxes) === 5);
+console.log("All assertions passed.");
