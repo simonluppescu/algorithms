@@ -11,7 +11,7 @@ function findPairs(arr, k) {
     var found = {};
     for (var i = 0; i < arr.length; i++) {
         var value = arr[i];
-        if (found[value]) {
+        if (found[value] !== undefined) {
             return [found[value], i];
         }
         else {
@@ -22,7 +22,8 @@ function findPairs(arr, k) {
 }
 assertArray_1.default(findPairs([4, 6, 10, 12, 18], 18), [1, 3]);
 assertArray_1.default(findPairs([4, 6, 10, 12, 18], 16), [1, 2]);
+assertArray_1.default(findPairs([4, 4], 8), [0, 1]);
 assertArray_1.default(findPairs([1, 3, 7, 2, 3, 10], 6), [1, 4]);
 assertArray_1.default(findPairs([1, 2, 3, 4, 5], 10), []);
-assertArray_1.default(findPairs([1, 3, 4, 2], 4), []);
+assertArray_1.default(findPairs([1, 3, 6, 2], 6), []);
 console.log("All assertions passed");
