@@ -11,7 +11,7 @@ function findPairs(arr, k) {
     var found = {};
     for (var i = 0; i < arr.length; i++) {
         var value = arr[i];
-        if (found[value] !== undefined) {
+        if (typeof found[value] !== "undefined") {
             return [found[value], i];
         }
         else {
