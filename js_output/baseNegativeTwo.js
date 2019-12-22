@@ -84,8 +84,7 @@ var NotOptimalSolver = /** @class */ (function () {
         }
         var firstArr = __spread(arr, [1]);
         var secondArr = __spread(arr, [0]);
-        return (this.computeHelper(firstArr, index - 1, sum + this.bitValues[index]) ||
-            this.computeHelper(secondArr, index - 1, sum));
+        return this.computeHelper(firstArr, index - 1, sum + this.bitValues[index]) || this.computeHelper(secondArr, index - 1, sum);
     };
     return NotOptimalSolver;
 }());
