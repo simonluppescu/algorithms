@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: MATH
  * Tags: math oop
@@ -13,46 +11,55 @@ Object.defineProperty(exports, "__esModule", { value: true });
  *
  * Your task is to calculate and return the distance the spider must jump to get to the fly.
  */
-var assert = require("assert");
-var JumpDistanceCalculator = /** @class */ (function () {
-    function JumpDistanceCalculator(spiderCoord, flyCoord) {
+import { assert } from "console";
+class JumpDistanceCalculator {
+    constructor(spiderCoord, flyCoord) {
         this.spiderCoord = spiderCoord;
         this.flyCoord = flyCoord;
     }
-    JumpDistanceCalculator.prototype.calculate = function () {
-        var radialDifference = this.computeRadialDifference();
-        var distance = this.computeDistance(radialDifference);
+    calculate() {
+        const radialDifference = this.computeRadialDifference();
+        const distance = this.computeDistance(radialDifference);
         return distance;
-    };
-    JumpDistanceCalculator.prototype.computeRadialDifference = function () {
-        var numRadialsBetween = Math.abs(this.spiderCoord.radial - this.flyCoord.radial);
+    }
+    computeRadialDifference() {
+        let numRadialsBetween = Math.abs(this.spiderCoord.radial - this.flyCoord.radial);
         numRadialsBetween = Math.min(numRadialsBetween, JumpDistanceCalculator.TOTAL_RADIALS - numRadialsBetween);
-        var radialDifference = this.convertNumRadialsToRadians(numRadialsBetween);
+        const radialDifference = this.convertNumRadialsToRadians(numRadialsBetween);
         return radialDifference;
-    };
-    JumpDistanceCalculator.prototype.convertNumRadialsToRadians = function (numRadials) {
+    }
+    convertNumRadialsToRadians(numRadials) {
         return (numRadials / JumpDistanceCalculator.TOTAL_RADIALS) * 2 * Math.PI;
-    };
-    JumpDistanceCalculator.prototype.computeDistance = function (radialDifference) {
-        var spiderRing = this.spiderCoord.ring;
-        var flyRing = this.flyCoord.ring;
-        return Math.sqrt(spiderRing * spiderRing + flyRing * flyRing - 2 * spiderRing * flyRing * Math.cos(radialDifference));
-    };
-    JumpDistanceCalculator.RADIAL_MAPPER = { A: 0, B: 1, C: 2, D: 3, E: 4, F: 5, G: 6, H: 7 };
-    JumpDistanceCalculator.TOTAL_RADIALS = Object.keys(JumpDistanceCalculator.RADIAL_MAPPER).length;
-    return JumpDistanceCalculator;
-}());
-var Coordinate = /** @class */ (function () {
-    function Coordinate(coordStr) {
+    }
+    computeDistance(radialDifference) {
+        const spiderRing = this.spiderCoord.ring;
+        const flyRing = this.flyCoord.ring;
+        return Math.sqrt(spiderRing * spiderRing +
+            flyRing * flyRing -
+            2 * spiderRing * flyRing * Math.cos(radialDifference));
+    }
+}
+JumpDistanceCalculator.RADIAL_MAPPER = {
+    A: 0,
+    B: 1,
+    C: 2,
+    D: 3,
+    E: 4,
+    F: 5,
+    G: 6,
+    H: 7,
+};
+JumpDistanceCalculator.TOTAL_RADIALS = Object.keys(JumpDistanceCalculator.RADIAL_MAPPER).length;
+class Coordinate {
+    constructor(coordStr) {
         if (coordStr.length !== 2) {
             throw new Error("coordinate must be length 2.");
         }
         this.radial = JumpDistanceCalculator.RADIAL_MAPPER[coordStr[0]];
         this.ring = parseInt(coordStr[1]);
     }
-    return Coordinate;
-}());
-var calculator = new JumpDistanceCalculator(new Coordinate("H2"), new Coordinate("H4"));
+}
+const calculator = new JumpDistanceCalculator(new Coordinate("H2"), new Coordinate("H4"));
 assert(calculator.calculate() === 2);
 calculator.spiderCoord = new Coordinate("H2");
 calculator.flyCoord = new Coordinate("A2");

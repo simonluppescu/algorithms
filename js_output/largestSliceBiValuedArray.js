@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: ARRAYS
  * Tags: easy
@@ -9,15 +7,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * 1 3 4 3 4 4 2 3
  * The answer is 5 since the slice 3 4 3 4 4 only consists of two values and it's largest.
  */
-var assert = require("assert");
+import { assert } from "console";
 function solution(arr) {
     if (arr.length <= 2)
         return arr.length;
-    var maxLength = 2;
-    var currLength = 2;
-    var firstNum = arr[0];
-    var secondNum = arr[1];
-    for (var i = 2; i < arr.length; i++) {
+    let maxLength = 2;
+    let currLength = 2;
+    let firstNum = arr[0];
+    let secondNum = arr[1];
+    for (let i = 2; i < arr.length; i++) {
         if (arr[i] === firstNum || arr[i] === secondNum) {
             currLength += 1;
         }

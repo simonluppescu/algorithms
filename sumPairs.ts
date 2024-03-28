@@ -4,7 +4,7 @@
  *
  * Given an array of integers, find a pair of indices whose values sum to a value, k.
  */
-import assertArrayEquals from "./utils/assertArray";
+import assertArrayEquals from "./utils/assertArray.js";
 
 function findPairs(arr: Array<number>, k: number): Array<number> {
   const found: { [key: number]: number } = {};

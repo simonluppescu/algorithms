@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: MATH
  * Tags: easy math
@@ -7,13 +5,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Given an array of integers where all are unique, unsorted, and consecutive, but one is missing,
  * return the missing integer.
  */
-var assert = require("assert");
+import { assert } from "console";
 function solution(arr) {
     if (arr.length === 0)
         return 1;
-    var arrSum = arr.reduce(function (prev, curr) { return curr + prev; });
-    var n = arr.length + 1;
-    var expectedSum = Math.floor((n * (n + 1)) / 2);
+    const arrSum = arr.reduce((prev, curr) => curr + prev);
+    const n = arr.length + 1;
+    const expectedSum = Math.floor((n * (n + 1)) / 2);
     return expectedSum - arrSum;
 }
 assert(solution([1]) === 2);

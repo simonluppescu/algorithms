@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: DYNAMIC_PROGRAMMING
  * Tags: recursion maps algorithms
@@ -8,9 +6,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * put as many objects into a knapsack with a weight limit where the total value
  * of all the objects is the highest possible.
  */
-var assert = require("assert");
-var Packer = /** @class */ (function () {
-    function Packer(v, w) {
+import { assert } from "console";
+class Packer {
+    constructor(v, w) {
         this.values = v;
         this.weights = w;
         if (this.values.length !== this.weights.length) {
@@ -18,40 +16,40 @@ var Packer = /** @class */ (function () {
         }
         this.memos = new Map();
     }
-    Packer.prototype.pack = function (capacity) {
+    pack(capacity) {
         return this.packHelper(this.values.length - 1, capacity);
-    };
-    Packer.prototype.packHelper = function (index, capacity) {
+    }
+    packHelper(index, capacity) {
         if (index < 0 || capacity === 0)
             return 0;
         if (this.alreadyCalculated(index, capacity)) {
             return this.memos.get(index).get(capacity);
         }
-        var result;
+        let result;
         if (this.weights[index] > capacity) {
             result = this.packHelper(index - 1, capacity);
         }
         else {
-            var addedValue = this.packHelper(index - 1, capacity - this.weights[index]) + this.values[index];
-            var notAddedValue = this.packHelper(index - 1, capacity);
+            const addedValue = this.packHelper(index - 1, capacity - this.weights[index]) +
+                this.values[index];
+            const notAddedValue = this.packHelper(index - 1, capacity);
             result = Math.max(addedValue, notAddedValue);
         }
         this.memoizeResult(index, capacity, result);
         return result;
-    };
-    Packer.prototype.alreadyCalculated = function (index, capacity) {
+    }
+    alreadyCalculated(index, capacity) {
         return this.memos.has(index) && this.memos.get(index).has(capacity);
-    };
-    Packer.prototype.memoizeResult = function (index, capacity, result) {
+    }
+    memoizeResult(index, capacity, result) {
         if (!this.memos.has(index)) {
             this.memos.set(index, new Map());
         }
         this.memos.get(index).set(capacity, result);
-    };
-    return Packer;
-}());
-var p = new Packer([1, 2, 12, 10], [1, 2, 6, 7]);
+    }
+}
+const p = new Packer([1, 2, 12, 10], [1, 2, 6, 7]);
 assert(p.pack(12) === 15);
-var p2 = new Packer([1, 2, 3, 2, 5, 6, 3, 2, 1, 2, 3, 1, 2], [1, 2, 3, 4, 6, 3, 4, 2, 4, 2, 4, 2, 1]);
-assert(p.pack(10) === 14);
+const p2 = new Packer([1, 2, 3, 2, 5, 6, 3, 2, 1, 2, 3, 1, 2], [1, 2, 3, 4, 6, 3, 4, 2, 4, 2, 4, 2, 1]);
+assert(p2.pack(10) === 14);
 console.log("All assertions passed");

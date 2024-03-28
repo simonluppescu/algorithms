@@ -4,7 +4,7 @@
  *
  * Determine if two strings are permutations (rearrangements of the letters) of each other.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 function isPermutation(str1, str2): boolean {
   if (str1.length !== str2.length) {

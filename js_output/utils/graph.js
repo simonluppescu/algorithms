@@ -1,13 +1,10 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Graph = /** @class */ (function () {
-    function Graph(root) {
+class Graph {
+    constructor(root) {
         this.edges = {};
         this.root = root;
     }
-    Graph.prototype.addAdjacent = function (origin, newAdjacent, edge) {
-        if (edge === void 0) { edge = null; }
-        var dest = null;
+    addAdjacent(origin, newAdjacent, edge = null) {
+        let dest = null;
         if (newAdjacent instanceof GraphNode) {
             dest = newAdjacent;
         }
@@ -19,14 +16,14 @@ var Graph = /** @class */ (function () {
         if (!edge) {
             this.edges[origin.value][dest.value] = edge;
         }
-    };
-    Graph.prototype.includes = function (value) {
-        var includesHelper = function (node) {
+    }
+    includes(value) {
+        const includesHelper = (node) => {
             if (node.value === value)
                 return true;
             node.visit();
-            var result = false;
-            node.adjacents.forEach(function (adjacent) {
+            let result = false;
+            node.adjacents.forEach((adjacent) => {
                 if (!adjacent.visited) {
                     result = result || includesHelper(adjacent);
                 }
@@ -34,14 +31,14 @@ var Graph = /** @class */ (function () {
             return result;
         };
         return includesHelper(this.root);
-    };
-    Graph.generateForDijkstra = function () {
-        var tokyo = new GraphNode("Tokyo");
-        var seoul = new GraphNode("Seoul");
-        var bangkok = new GraphNode("Bangkok");
-        var moscow = new GraphNode("Moscow");
-        var nepal = new GraphNode("Nepal");
-        var g = new Graph(tokyo);
+    }
+    static generateForDijkstra() {
+        const tokyo = new GraphNode("Tokyo");
+        const seoul = new GraphNode("Seoul");
+        const bangkok = new GraphNode("Bangkok");
+        const moscow = new GraphNode("Moscow");
+        const nepal = new GraphNode("Nepal");
+        const g = new Graph(tokyo);
         g.addAdjacent(tokyo, seoul, 10);
         g.addAdjacent(tokyo, bangkok, 15);
         g.addAdjacent(bangkok, seoul, 20);
@@ -49,19 +46,16 @@ var Graph = /** @class */ (function () {
         g.addAdjacent(nepal, moscow, 25);
         g.addAdjacent(nepal, bangkok, 20);
         return g;
-    };
-    return Graph;
-}());
-exports.default = Graph;
-var GraphNode = /** @class */ (function () {
-    function GraphNode(value) {
+    }
+}
+export default Graph;
+export class GraphNode {
+    constructor(value) {
         this.value = value;
         this.adjacents = [];
         this.visited = false;
     }
-    GraphNode.prototype.visit = function () {
+    visit() {
         this.visited = true;
-    };
-    return GraphNode;
-}());
-exports.GraphNode = GraphNode;
+    }
+}

@@ -5,7 +5,7 @@
  * Determine if every character in a string is unique
  */
 
-import * as assert from "assert";
+import { assert } from "console";
 
 function isUnique(str): boolean {
   const characters = {};

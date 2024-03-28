@@ -1,21 +1,18 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Stack = /** @class */ (function () {
-    function Stack() {
+class Stack {
+    constructor() {
         this.stack = new Array();
     }
-    Stack.prototype.push = function (val) {
+    push(val) {
         this.stack.push(val);
-    };
-    Stack.prototype.pop = function () {
+    }
+    pop() {
         return this.stack.pop();
-    };
-    Stack.prototype.peek = function () {
+    }
+    peek() {
         return this.stack[this.stack.length - 1];
-    };
-    Stack.prototype.isEmpty = function () {
+    }
+    isEmpty() {
         return this.stack.length === 0;
-    };
-    return Stack;
-}());
-exports.default = Stack;
+    }
+}
+export default Stack;

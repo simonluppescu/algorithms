@@ -1,15 +1,3 @@
-"use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: RECURSION
  * Tags: recursion oop sets
@@ -19,9 +7,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * instance of the towers. Instead of duplicating them, it undos the move after the
  * recursive call. This ends up with a bunch of solved states.
  */
-var stack_1 = require("./utils/stack");
-var Hanoi = /** @class */ (function () {
-    function Hanoi(maxValue) {
+import Stack from "./utils/stack.js";
+class Hanoi {
+    constructor(maxValue) {
         this.towers = [];
         this.towers.push(new Tower(maxValue));
         this.towers.push(new Tower());
@@ -29,46 +17,47 @@ var Hanoi = /** @class */ (function () {
         this.solvedKey = this.towers[0].toString();
         this.triedMoves = new Set();
     }
-    Hanoi.prototype.solve = function () {
-        var _this = this;
-        var moves = this.getMoves();
-        moves.forEach(function (move) {
-            _this.applyMove(move);
-            var thisState = _this.toKey();
-            if (_this.isSolved()) {
-                console.log("Solved!! " + thisState);
+    solve() {
+        const moves = this.getMoves();
+        moves.forEach((move) => {
+            this.applyMove(move);
+            const thisState = this.toKey();
+            if (this.isSolved()) {
+                console.log(`Solved!! ${thisState}`);
                 return;
             }
-            if (_this.triedMoves.has(thisState)) {
-                console.log("State " + thisState + " has already been done.");
+            if (this.triedMoves.has(thisState)) {
+                console.log(`State ${thisState} has already been done.`);
             }
             else {
-                console.log("Current State: " + thisState);
-                _this.triedMoves.add(thisState);
-                _this.solve();
+                console.log(`Current State: ${thisState}`);
+                this.triedMoves.add(thisState);
+                this.solve();
             }
-            if (!_this.isSolved())
-                _this.undoMove(move);
+            if (!this.isSolved())
+                this.undoMove(move);
         });
-    };
-    Hanoi.prototype.isSolved = function () {
-        return this.towers[0].isEmpty() && this.towers[1].isEmpty() && this.towers[2].toString() === this.solvedKey;
-    };
-    Hanoi.prototype.applyMove = function (move) {
-        var originVal = this.towers[move.originIndex].pop();
+    }
+    isSolved() {
+        return (this.towers[0].isEmpty() &&
+            this.towers[1].isEmpty() &&
+            this.towers[2].toString() === this.solvedKey);
+    }
+    applyMove(move) {
+        const originVal = this.towers[move.originIndex].pop();
         this.towers[move.destIndex].push(originVal);
-    };
-    Hanoi.prototype.undoMove = function (move) {
-        var destVal = this.towers[move.destIndex].pop();
+    }
+    undoMove(move) {
+        const destVal = this.towers[move.destIndex].pop();
         this.towers[move.originIndex].push(destVal);
-    };
-    Hanoi.prototype.toKey = function () {
-        return this.towers.map(function (tower) { return tower.toString(); }).join("-");
-    };
-    Hanoi.prototype.getMoves = function () {
-        var moves = [];
-        for (var i = 0; i < this.towers.length; i++) {
-            for (var j = 0; j < this.towers.length; j++) {
+    }
+    toKey() {
+        return this.towers.map((tower) => tower.toString()).join("-");
+    }
+    getMoves() {
+        const moves = [];
+        for (let i = 0; i < this.towers.length; i++) {
+            for (let j = 0; j < this.towers.length; j++) {
                 if (i === j)
                     continue;
                 if (this.towers[i].canMoveTo(this.towers[j])) {
@@ -77,39 +66,33 @@ var Hanoi = /** @class */ (function () {
             }
         }
         return moves;
-    };
-    return Hanoi;
-}());
-var Tower = /** @class */ (function (_super) {
-    __extends(Tower, _super);
-    function Tower(maxValue) {
-        if (maxValue === void 0) { maxValue = 0; }
-        var _this = _super.call(this) || this;
+    }
+}
+class Tower extends Stack {
+    constructor(maxValue = 0) {
+        super();
         if (maxValue > 0) {
-            for (var i = maxValue; i >= 1; i--) {
-                _this.push(i);
+            for (let i = maxValue; i >= 1; i--) {
+                this.push(i);
             }
         }
-        return _this;
     }
-    Tower.prototype.toString = function () {
+    toString() {
         return this.stack.join("");
-    };
-    Tower.prototype.canMoveTo = function (destTower) {
+    }
+    canMoveTo(destTower) {
         if (this.isEmpty())
             return false;
         if (destTower.isEmpty())
             return true;
         return this.peek() < destTower.peek();
-    };
-    return Tower;
-}(stack_1.default));
-var Move = /** @class */ (function () {
-    function Move(o, d) {
+    }
+}
+class Move {
+    constructor(o, d) {
         this.originIndex = o;
         this.destIndex = d;
     }
-    return Move;
-}());
-var game = new Hanoi(5);
+}
+const game = new Hanoi(5);
 game.solve();

@@ -9,7 +9,7 @@
  * 2^1 + 2^0 + 2^2 + 2^2 = 2 + 1 + 4 + 4 = 11.
  * The shortest array with this sum is [3, 1, 0], so the answer is 3.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 class Binarian {
   memos: Map<number, number>;

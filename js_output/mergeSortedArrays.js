@@ -1,17 +1,15 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: ARRAYS
  * Tags: sorting two_indices
  *
  * Merge two sorted arrays into one sorted array.
  */
-var assertArray_1 = require("./utils/assertArray");
+import assertArray from "./utils/assertArray.js";
 function mergeSortedArrayDel(arr1, arr2) {
-    var result = [];
+    let result = [];
     while (arr1.length > 0 || arr2.length > 0) {
-        var firstVal = arr1[0];
-        var secondVal = arr2[0];
+        const firstVal = arr1[0];
+        const secondVal = arr2[0];
         if (arr1.length === 0) {
             result = result.concat(arr2.splice(0));
             break;
@@ -30,9 +28,9 @@ function mergeSortedArrayDel(arr1, arr2) {
     return result;
 }
 function mergeSortedArrayCopy(arr1, arr2) {
-    var result = [];
-    var i = 0;
-    var j = 0;
+    const result = [];
+    let i = 0;
+    let j = 0;
     while (i < arr1.length || j < arr2.length) {
         if (typeof arr2[j] === "undefined" || arr1[i] <= arr2[j]) {
             result.push(arr1[i]);
@@ -45,16 +43,20 @@ function mergeSortedArrayCopy(arr1, arr2) {
     }
     return result;
 }
-assertArray_1.default(mergeSortedArrayDel([1, 3, 5, 7, 9, 13, 19], [2, 4, 6, 8]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 19]);
-assertArray_1.default(mergeSortedArrayDel([1, 5, 7, 10], [2, 6, 12, 14]), [1, 2, 5, 6, 7, 10, 12, 14]);
-assertArray_1.default(mergeSortedArrayDel([], [1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
-assertArray_1.default(mergeSortedArrayDel([1], [1, 2, 3, 4, 5, 6]), [1, 1, 2, 3, 4, 5, 6]);
-assertArray_1.default(mergeSortedArrayDel([1, 1, 1, 1, 1], [1, 1, 1, 1]), [1, 1, 1, 1, 1, 1, 1, 1, 1]);
-assertArray_1.default(mergeSortedArrayDel([], []), []);
-assertArray_1.default(mergeSortedArrayCopy([1, 3, 5, 7, 9, 13, 19], [2, 4, 6, 8]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 19]);
-assertArray_1.default(mergeSortedArrayCopy([1, 5, 7, 10], [2, 6, 12, 14]), [1, 2, 5, 6, 7, 10, 12, 14]);
-assertArray_1.default(mergeSortedArrayCopy([], [1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
-assertArray_1.default(mergeSortedArrayCopy([1], [1, 2, 3, 4, 5, 6]), [1, 1, 2, 3, 4, 5, 6]);
-assertArray_1.default(mergeSortedArrayCopy([1, 1, 1, 1, 1], [1, 1, 1, 1]), [1, 1, 1, 1, 1, 1, 1, 1, 1]);
-assertArray_1.default(mergeSortedArrayCopy([], []), []);
+// prettier-ignore
+// eslint-disable-next-line max-len
+assertArray(mergeSortedArrayDel([1, 3, 5, 7, 9, 13, 19], [2, 4, 6, 8]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 19]);
+assertArray(mergeSortedArrayDel([1, 5, 7, 10], [2, 6, 12, 14]), [1, 2, 5, 6, 7, 10, 12, 14]);
+assertArray(mergeSortedArrayDel([], [1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
+assertArray(mergeSortedArrayDel([1], [1, 2, 3, 4, 5, 6]), [1, 1, 2, 3, 4, 5, 6]);
+assertArray(mergeSortedArrayDel([1, 1, 1, 1, 1], [1, 1, 1, 1]), [1, 1, 1, 1, 1, 1, 1, 1, 1]);
+assertArray(mergeSortedArrayDel([], []), []);
+// prettier-ignore
+// eslint-disable-next-line max-len
+assertArray(mergeSortedArrayCopy([1, 3, 5, 7, 9, 13, 19], [2, 4, 6, 8]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 19]);
+assertArray(mergeSortedArrayCopy([1, 5, 7, 10], [2, 6, 12, 14]), [1, 2, 5, 6, 7, 10, 12, 14]);
+assertArray(mergeSortedArrayCopy([], [1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
+assertArray(mergeSortedArrayCopy([1], [1, 2, 3, 4, 5, 6]), [1, 1, 2, 3, 4, 5, 6]);
+assertArray(mergeSortedArrayCopy([1, 1, 1, 1, 1], [1, 1, 1, 1]), [1, 1, 1, 1, 1, 1, 1, 1, 1]);
+assertArray(mergeSortedArrayCopy([], []), []);
 console.log("All assertions passed.");

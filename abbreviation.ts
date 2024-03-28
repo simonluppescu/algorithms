@@ -11,7 +11,7 @@
  */
 
 // NOTE: This algorithm is not optimal. It will timeout for very large strings.
-import * as assert from "assert";
+import { assert } from "console";
 
 class Abbreviator {
   memos: Map<string, boolean>;
@@ -35,7 +35,9 @@ class Abbreviator {
     // Body
     const firstLowerIndex = a.match(/[a-z]/).index;
 
-    const taken = `${a.slice(0, firstLowerIndex)}${a.slice(firstLowerIndex + 1)}`;
+    const taken = `${a.slice(0, firstLowerIndex)}${a.slice(
+      firstLowerIndex + 1
+    )}`;
     const upperCased = a.replace(/[a-z]/, a[firstLowerIndex].toUpperCase());
 
     // Memoize

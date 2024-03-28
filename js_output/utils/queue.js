@@ -1,26 +1,23 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Queue = /** @class */ (function () {
-    function Queue() {
+class Queue {
+    constructor() {
         this.array = new Array();
     }
-    Queue.prototype.enqueue = function (value) {
+    enqueue(value) {
         this.array.push(value);
-    };
-    Queue.prototype.dequeue = function () {
+    }
+    dequeue() {
         return this.array.splice(0, 1)[0];
-    };
-    Queue.prototype.clear = function () {
+    }
+    clear() {
         while (!this.isEmpty()) {
             this.dequeue();
         }
-    };
-    Queue.prototype.peek = function () {
+    }
+    peek() {
         return this.array[0];
-    };
-    Queue.prototype.isEmpty = function () {
+    }
+    isEmpty() {
         return this.array.length === 0;
-    };
-    return Queue;
-}());
-exports.default = Queue;
+    }
+}
+export default Queue;

@@ -4,7 +4,7 @@
  *
  * Given a string S and a smaller string T, check if an anagram of T exists in S.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 class Solver {
   text: string;
@@ -45,7 +45,10 @@ class Solver {
     return this.isComplete(patternCounts, windowCounts);
   }
 
-  isComplete(pCounts: Map<string, number>, windowCounts: Map<string, number>): boolean {
+  isComplete(
+    pCounts: Map<string, number>,
+    windowCounts: Map<string, number>
+  ): boolean {
     // console.log(windowCounts);
 
     for (const pair of Array.from(pCounts.entries())) {

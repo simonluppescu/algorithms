@@ -1,4 +1,4 @@
-import BinaryTree, { BinaryTreeNode } from "./utils/binaryTree";
+import BinaryTree, { BinaryTreeNode } from "./utils/binaryTree.js";
 
 /**
  * Category: TREES

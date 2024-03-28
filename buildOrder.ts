@@ -4,7 +4,7 @@
  *
  * Use Topological Sort to get the build order based on packages and their dependencies. Assume there are no cycles in dependencies.
  */
-import assertArray from "./utils/assertArray";
+import assertArray from "./utils/assertArray.js";
 
 class BuildOrder {
   packages: Map<string, Array<string>>;

@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "watch": true,
-    "lib": ["dom", "es2017"],
+    "target": "ES2020",
+    "module": "ESNext",
+    "lib": ["ES2020", "DOM"],
     "outDir": "js_output",
     "downlevelIteration": true
   }

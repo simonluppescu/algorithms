@@ -1,38 +1,35 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Dequeue = /** @class */ (function () {
-    function Dequeue() {
+class Dequeue {
+    constructor() {
         this.array = [];
     }
-    Dequeue.prototype.pushFront = function (value) {
+    pushFront(value) {
         this.array.splice(0, 0, value);
-    };
-    Dequeue.prototype.popFront = function () {
+    }
+    popFront() {
         return this.array.splice(0, 1);
-    };
-    Dequeue.prototype.peekFront = function () {
+    }
+    peekFront() {
         return this.array[0];
-    };
-    Dequeue.prototype.pushBack = function (value) {
+    }
+    pushBack(value) {
         this.array.push(value);
-    };
-    Dequeue.prototype.popBack = function () {
+    }
+    popBack() {
         return this.array.pop();
-    };
-    Dequeue.prototype.peekBack = function () {
+    }
+    peekBack() {
         return this.array[this.array.length - 1];
-    };
-    Dequeue.prototype.clear = function () {
+    }
+    clear() {
         while (!this.isEmpty()) {
             this.popFront();
         }
-    };
-    Dequeue.prototype.length = function () {
+    }
+    length() {
         return this.array.length;
-    };
-    Dequeue.prototype.isEmpty = function () {
+    }
+    isEmpty() {
         return this.length() === 0;
-    };
-    return Dequeue;
-}());
-exports.default = Dequeue;
+    }
+}
+export default Dequeue;

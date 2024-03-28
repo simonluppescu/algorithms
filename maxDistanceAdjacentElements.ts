@@ -8,7 +8,7 @@
  * 2 3 4 7 2 4 3 5
  * The answer is 6 because the 2 at index 0 and 3 at index 6 are the farthest, and the values difference is 1.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 function solution(arr: number[]): number {
   if (arr.length === 1) return 0;

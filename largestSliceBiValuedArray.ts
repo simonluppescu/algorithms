@@ -7,7 +7,7 @@
  * 1 3 4 3 4 4 2 3
  * The answer is 5 since the slice 3 4 3 4 4 only consists of two values and it's largest.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 function solution(arr: number[]): number {
   if (arr.length <= 2) return arr.length;

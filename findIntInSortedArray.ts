@@ -4,7 +4,7 @@
  *
  * Given a sorted array of integers, find the index of a number.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 class Searcher {
   array: number[];
@@ -32,7 +32,7 @@ class Searcher {
       if (this.lowerBound === this.upperBound) break;
 
       this.nextStep();
-      // this.print(target);
+      this.print(target);
     }
 
     return this.currValue === target ? this.currIndex : -1;
@@ -53,6 +53,7 @@ class Searcher {
 
   print(target: number): void {
     console.log(
+      //eslint-disable-next-line max-len
       `Lower: ${this.lowerBound}, Upper: ${this.upperBound}, currI: ${this.currIndex}, curr: ${this.currValue}, target: ${target}`
     );
   }

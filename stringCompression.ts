@@ -5,7 +5,7 @@
  * Given a string, return another string with counts of each character in order.
  * For example: "aaabcc" => "a3b1c2"
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 function compress(str: string): string {
   if (str.length === 0) return "";

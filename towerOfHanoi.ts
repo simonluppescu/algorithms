@@ -7,7 +7,7 @@
  * instance of the towers. Instead of duplicating them, it undos the move after the
  * recursive call. This ends up with a bunch of solved states.
  */
-import Stack from "./utils/stack";
+import Stack from "./utils/stack.js";
 
 class Hanoi {
   towers: Tower[];
@@ -49,7 +49,11 @@ class Hanoi {
   }
 
   isSolved(): boolean {
-    return this.towers[0].isEmpty() && this.towers[1].isEmpty() && this.towers[2].toString() === this.solvedKey;
+    return (
+      this.towers[0].isEmpty() &&
+      this.towers[1].isEmpty() &&
+      this.towers[2].toString() === this.solvedKey
+    );
   }
 
   applyMove(move: Move): void {

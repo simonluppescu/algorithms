@@ -1,25 +1,23 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: ARRAYS
  * Tags: queues algorithms
  *
  * Given an array of integers, keep the maximum number in a continuously sliding subset of the array of size K.
- * For example, given array 4 3 2 5 4 3 2 1, the result is 4 5 5 5 4 3.
+ * For example, given array 4 3 2 5 4 3 2 1 with K = 3, the result is 4 5 5 5 4 3.
  */
-var assertArray_1 = require("./utils/assertArray");
-var dequeue_1 = require("./utils/dequeue");
-var Slider = /** @class */ (function () {
-    function Slider(arr, windowSize) {
+import assertArrayEquals from "./utils/assertArray.js";
+import Dequeue from "./utils/dequeue.js";
+class Slider {
+    constructor(arr, windowSize) {
         this.array = arr;
         this.k = windowSize;
-        this.queue = new dequeue_1.default();
+        this.queue = new Dequeue();
         this.maxArray = [];
     }
-    Slider.prototype.run = function () {
-        for (var i = 0; i < this.array.length; i++) {
-            var currValue = this.array[i];
-            console.log("Current value is " + currValue); // CONSOLE LOG ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    run() {
+        for (let i = 0; i < this.array.length; i++) {
+            const currValue = this.array[i];
+            console.log(`Current value is ${currValue}`); // CONSOLE LOG ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
             // If sliding window moves past the index at the front of the queue
             if (i - this.k === this.queue.peekFront()) {
                 // we have to remove it since it's no longer part of the window
@@ -55,26 +53,25 @@ var Slider = /** @class */ (function () {
             }
         }
         return this.maxArray;
-    };
-    Slider.prototype.addMax = function () {
+    }
+    addMax() {
         this.maxArray.push(this.array[this.queue.peekFront()]);
-    };
-    return Slider;
-}());
-var s = new Slider([9, 10, 3, 4, 8, 13, 14, 9, 2], 4);
-assertArray_1.default(s.run(), [10, 10, 13, 14, 14, 14]);
+    }
+}
+let s = new Slider([9, 10, 3, 4, 8, 13, 14, 9, 2], 4);
+assertArrayEquals(s.run(), [10, 10, 13, 14, 14, 14]);
 s = new Slider([9, 10, 3, 4, 8, 7, 6, 5, 2], 4);
-assertArray_1.default(s.run(), [10, 10, 8, 8, 8, 7]);
+assertArrayEquals(s.run(), [10, 10, 8, 8, 8, 7]);
 s = new Slider([13, 12, 12, 12, 12, 12, 12], 3);
-assertArray_1.default(s.run(), [13, 12, 12, 12, 12]);
+assertArrayEquals(s.run(), [13, 12, 12, 12, 12]);
 s = new Slider([1, 4, 6, 2, 6, 2, 9, 12, 10], 1);
-assertArray_1.default(s.run(), [1, 4, 6, 2, 6, 2, 9, 12, 10]);
+assertArrayEquals(s.run(), [1, 4, 6, 2, 6, 2, 9, 12, 10]);
 s = new Slider([10, 9, 8, 7, 6, 5, 4, 3, 2, 1], 3);
-assertArray_1.default(s.run(), [10, 9, 8, 7, 6, 5, 4, 3]);
+assertArrayEquals(s.run(), [10, 9, 8, 7, 6, 5, 4, 3]);
 s = new Slider([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3);
-assertArray_1.default(s.run(), [3, 4, 5, 6, 7, 8, 9, 10]);
+assertArrayEquals(s.run(), [3, 4, 5, 6, 7, 8, 9, 10]);
 s = new Slider([10, 1, 1, 1, 10, 1, 1, 1, 1, 10, 1, 1], 4);
-assertArray_1.default(s.run(), [10, 10, 10, 10, 10, 1, 10, 10, 10]);
+assertArrayEquals(s.run(), [10, 10, 10, 10, 10, 1, 10, 10, 10]);
 s = new Slider([1, 4, 6, 2, 8, 3, 5], 7);
-assertArray_1.default(s.run(), [8]);
+assertArrayEquals(s.run(), [8]);
 console.log("Done.");

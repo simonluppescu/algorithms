@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: ARRAYS
  * Tags: sorting maps
@@ -10,22 +8,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * 2 3 4 7 2 4 3 5
  * The answer is 6 because the 2 at index 0 and 3 at index 6 are the farthest, and the values difference is 1.
  */
-var assert = require("assert");
+import { assert } from "console";
 function solution(arr) {
     if (arr.length === 1)
         return 0;
-    var indices = {};
-    for (var i = 0; i < arr.length; i++) {
+    const indices = {};
+    for (let i = 0; i < arr.length; i++) {
         if (indices[arr[i]] === undefined)
             indices[arr[i]] = [];
         indices[arr[i]].push(i);
     }
-    var maxDistance = 0;
-    var values = Object.keys(indices).sort();
-    for (var i = 1; i < values.length; i++) {
-        var first = indices[values[i - 1]];
-        var second = indices[values[i]];
-        var currDistance = Math.max(getDiff(first[0], second[second.length - 1]), getDiff(first[first.length - 1], second[0]));
+    let maxDistance = 0;
+    const values = Object.keys(indices).sort();
+    for (let i = 1; i < values.length; i++) {
+        const first = indices[values[i - 1]];
+        const second = indices[values[i]];
+        const currDistance = Math.max(getDiff(first[0], second[second.length - 1]), getDiff(first[first.length - 1], second[0]));
         if (currDistance > maxDistance)
             maxDistance = currDistance;
     }

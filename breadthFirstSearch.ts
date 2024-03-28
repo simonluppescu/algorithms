@@ -4,9 +4,9 @@
  *
  * Breadth First Search of a graph. Keeps track of visited nodes.
  */
-import Graph, { GraphNode } from "./utils/graph";
-import Queue from "./utils/queue";
-import * as assert from "assert";
+import Graph, { GraphNode } from "./utils/graph.js";
+import Queue from "./utils/queue.js";
+import { assert } from "console";
 
 class BSTSearcher {
   graph: Graph;

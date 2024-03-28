@@ -12,8 +12,8 @@
  * Example: 3 DUP 5 + - returns 5.
  * Example: 3 DUP 2 - - return -1 since the result of 2 - 3 is negative.
  */
-import Stack from "./utils/stack";
-import * as assert from "assert";
+import Stack from "./utils/stack.js";
+import { assert } from "console";
 
 class Solver {
   MAX_VALUE = 2 ** 20;

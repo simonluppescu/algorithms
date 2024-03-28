@@ -6,7 +6,7 @@
  * put as many objects into a knapsack with a weight limit where the total value
  * of all the objects is the highest possible.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 class Packer {
   values: number[];
@@ -39,7 +39,9 @@ class Packer {
     if (this.weights[index] > capacity) {
       result = this.packHelper(index - 1, capacity);
     } else {
-      const addedValue = this.packHelper(index - 1, capacity - this.weights[index]) + this.values[index];
+      const addedValue =
+        this.packHelper(index - 1, capacity - this.weights[index]) +
+        this.values[index];
       const notAddedValue = this.packHelper(index - 1, capacity);
       result = Math.max(addedValue, notAddedValue);
     }
@@ -64,7 +66,10 @@ class Packer {
 const p = new Packer([1, 2, 12, 10], [1, 2, 6, 7]);
 assert(p.pack(12) === 15);
 
-const p2 = new Packer([1, 2, 3, 2, 5, 6, 3, 2, 1, 2, 3, 1, 2], [1, 2, 3, 4, 6, 3, 4, 2, 4, 2, 4, 2, 1]);
-assert(p.pack(10) === 14);
+const p2 = new Packer(
+  [1, 2, 3, 2, 5, 6, 3, 2, 1, 2, 3, 1, 2],
+  [1, 2, 3, 4, 6, 3, 4, 2, 4, 2, 4, 2, 1]
+);
+assert(p2.pack(10) === 14);
 
 console.log("All assertions passed");

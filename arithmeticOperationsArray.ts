@@ -14,7 +14,7 @@
  * 4 5 2
  * The resulting array is 0 7 7 10 12 9 7 7 7 7, so the answer is 12.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 class ArithmeticSolver {
   intervals: Map<number, number>;

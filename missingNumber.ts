@@ -5,7 +5,7 @@
  * Given an array of integers where all are unique, unsorted, and consecutive, but one is missing,
  * return the missing integer.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 function solution(arr: number[]): number {
   if (arr.length === 0) return 1;

@@ -11,11 +11,22 @@
  *
  * Your task is to calculate and return the distance the spider must jump to get to the fly.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 class JumpDistanceCalculator {
-  public static RADIAL_MAPPER = { A: 0, B: 1, C: 2, D: 3, E: 4, F: 5, G: 6, H: 7 };
-  public static TOTAL_RADIALS = Object.keys(JumpDistanceCalculator.RADIAL_MAPPER).length;
+  public static RADIAL_MAPPER = {
+    A: 0,
+    B: 1,
+    C: 2,
+    D: 3,
+    E: 4,
+    F: 5,
+    G: 6,
+    H: 7,
+  };
+  public static TOTAL_RADIALS = Object.keys(
+    JumpDistanceCalculator.RADIAL_MAPPER
+  ).length;
 
   spiderCoord: Coordinate;
   flyCoord: Coordinate;
@@ -34,8 +45,13 @@ class JumpDistanceCalculator {
   }
 
   computeRadialDifference(): number {
-    let numRadialsBetween = Math.abs(this.spiderCoord.radial - this.flyCoord.radial);
-    numRadialsBetween = Math.min(numRadialsBetween, JumpDistanceCalculator.TOTAL_RADIALS - numRadialsBetween);
+    let numRadialsBetween = Math.abs(
+      this.spiderCoord.radial - this.flyCoord.radial
+    );
+    numRadialsBetween = Math.min(
+      numRadialsBetween,
+      JumpDistanceCalculator.TOTAL_RADIALS - numRadialsBetween
+    );
     const radialDifference = this.convertNumRadialsToRadians(numRadialsBetween);
 
     return radialDifference;
@@ -50,7 +66,9 @@ class JumpDistanceCalculator {
     const flyRing = this.flyCoord.ring;
 
     return Math.sqrt(
-      spiderRing * spiderRing + flyRing * flyRing - 2 * spiderRing * flyRing * Math.cos(radialDifference)
+      spiderRing * spiderRing +
+        flyRing * flyRing -
+        2 * spiderRing * flyRing * Math.cos(radialDifference)
     );
   }
 }
@@ -69,7 +87,10 @@ class Coordinate {
   }
 }
 
-const calculator = new JumpDistanceCalculator(new Coordinate("H2"), new Coordinate("H4"));
+const calculator = new JumpDistanceCalculator(
+  new Coordinate("H2"),
+  new Coordinate("H4")
+);
 assert(calculator.calculate() === 2);
 
 calculator.spiderCoord = new Coordinate("H2");

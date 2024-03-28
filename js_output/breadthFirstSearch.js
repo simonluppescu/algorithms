@@ -1,37 +1,34 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: GRAPHS
  * Tags: algorithms search queues
  *
  * Breadth First Search of a graph. Keeps track of visited nodes.
  */
-var graph_1 = require("./utils/graph");
-var queue_1 = require("./utils/queue");
-var assert = require("assert");
-var BSTSearcher = /** @class */ (function () {
-    function BSTSearcher(g) {
+import Graph from "./utils/graph.js";
+import Queue from "./utils/queue.js";
+import { assert } from "console";
+class BSTSearcher {
+    constructor(g) {
         this.graph = g;
     }
-    BSTSearcher.prototype.includes = function (value) {
-        var queue = new queue_1.default();
+    includes(value) {
+        const queue = new Queue();
         queue.enqueue(this.graph.root);
         while (!queue.isEmpty()) {
-            var node = queue.dequeue();
+            const node = queue.dequeue();
             node.visit();
             if (node.value === value)
                 return true;
-            node.adjacents.forEach(function (adjacent) {
+            node.adjacents.forEach((adjacent) => {
                 if (adjacent.visited)
                     return;
                 queue.enqueue(adjacent);
             });
         }
         return false;
-    };
-    return BSTSearcher;
-}());
-var searcher = new BSTSearcher(graph_1.default.generateForDijkstra());
+    }
+}
+const searcher = new BSTSearcher(Graph.generateForDijkstra());
 assert(searcher.includes("Tokyo") === true);
 assert(searcher.includes("Nepal") === true);
 assert(searcher.includes("Seattle") === false);

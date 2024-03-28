@@ -6,7 +6,7 @@
  * and whose values sum to the greatest amount.
  * For example, [-2, 1, 3, -4, 5], the subset is [3, 5] so the answer is 8.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 class MaxSubsetSolver {
   array: number[];
@@ -48,7 +48,11 @@ class MaxSubsetSolver {
     this.memos.set(1, currMax);
 
     for (let i = 2; i < this.array.length; i++) {
-      currMax = Math.max(this.array[i], this.array[i] + this.memos.get(i - 2), currMax);
+      currMax = Math.max(
+        this.array[i],
+        this.array[i] + this.memos.get(i - 2),
+        currMax
+      );
 
       this.memos.set(i, currMax);
     }

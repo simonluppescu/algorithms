@@ -64,7 +64,11 @@ ${spacing}}`.trim();
       new BinaryTreeNode(2, new BinaryTreeNode(1, null, null), null),
       new BinaryTreeNode(4, null, null)
     );
-    const right = new BinaryTreeNode(8, new BinaryTreeNode(6, null, null), new BinaryTreeNode(9, null, null));
+    const right = new BinaryTreeNode(
+      8,
+      new BinaryTreeNode(6, null, null),
+      new BinaryTreeNode(9, null, null)
+    );
 
     const node = new BinaryTreeNode(5, left, right);
 
@@ -77,7 +81,11 @@ ${spacing}}`.trim();
       new BinaryTreeNode(2, new BinaryTreeNode(3, null, null), null),
       new BinaryTreeNode(4, null, null)
     );
-    const right = new BinaryTreeNode(5, new BinaryTreeNode(6, null, null), new BinaryTreeNode(7, null, null));
+    const right = new BinaryTreeNode(
+      5,
+      new BinaryTreeNode(6, null, null),
+      new BinaryTreeNode(7, null, null)
+    );
 
     const node = new BinaryTreeNode(8, left, right);
 

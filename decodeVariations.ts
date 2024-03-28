@@ -6,7 +6,7 @@
  * where 'a' -> 1 and 'z' -> 26.
  * For example: '1262' can become 1 2 6 2, 12 6 2, 1 26 2, so the answer is 3.
  */
-import * as assert from "assert";
+import { assert } from "console";
 
 class Decoder {
   seenValues: Map<string, number>;

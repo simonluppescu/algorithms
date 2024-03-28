@@ -1,15 +1,3 @@
-"use strict";
-var __values = (this && this.__values) || function (o) {
-    var m = typeof Symbol === "function" && o[Symbol.iterator], i = 0;
-    if (m) return m.call(o);
-    return {
-        next: function () {
-            if (o && i >= o.length) o = void 0;
-            return { value: o && o[i++], done: !o };
-        }
-    };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Category: MATH
  * Tags: easy arithmetic
@@ -24,105 +12,93 @@ Object.defineProperty(exports, "__esModule", { value: true });
  * Example: 3 DUP 5 + - returns 5.
  * Example: 3 DUP 2 - - return -1 since the result of 2 - 3 is negative.
  */
-var stack_1 = require("./utils/stack");
-var assert = require("assert");
-var Solver = /** @class */ (function () {
-    function Solver() {
-        this.MAX_VALUE = Math.pow(2, 20);
-        this.stack = new stack_1.default();
+import Stack from "./utils/stack.js";
+import { assert } from "console";
+class Solver {
+    constructor() {
+        this.MAX_VALUE = 2 ** 20;
+        this.stack = new Stack();
         this.okayToContinue = true;
     }
-    Solver.prototype.compute = function (strInput) {
-        var commands = strInput.split(" ");
-        try {
-            for (var commands_1 = __values(commands), commands_1_1 = commands_1.next(); !commands_1_1.done; commands_1_1 = commands_1.next()) {
-                var command = commands_1_1.value;
-                if (!this.okayToContinue)
+    compute(strInput) {
+        const commands = strInput.split(" ");
+        for (const command of commands) {
+            if (!this.okayToContinue)
+                break;
+            switch (command) {
+                case "DUP": {
+                    this.duplicate();
                     break;
-                switch (command) {
-                    case "DUP": {
-                        this.duplicate();
-                        break;
-                    }
-                    case "POP": {
-                        this.pop();
-                        break;
-                    }
-                    case "+": {
-                        this.add();
-                        break;
-                    }
-                    case "-": {
-                        this.subtract();
-                        break;
-                    }
-                    default:
-                        this.addNumber(command);
-                        break;
                 }
+                case "POP": {
+                    this.pop();
+                    break;
+                }
+                case "+": {
+                    this.add();
+                    break;
+                }
+                case "-": {
+                    this.subtract();
+                    break;
+                }
+                default:
+                    this.addNumber(command);
+                    break;
             }
-        }
-        catch (e_1_1) { e_1 = { error: e_1_1 }; }
-        finally {
-            try {
-                if (commands_1_1 && !commands_1_1.done && (_a = commands_1.return)) _a.call(commands_1);
-            }
-            finally { if (e_1) throw e_1.error; }
         }
         return this.okayToContinue && !this.stack.isEmpty() ? this.stack.peek() : -1;
-        var e_1, _a;
-    };
-    Solver.prototype.duplicate = function () {
-        var topElement = this.stack.peek();
+    }
+    duplicate() {
+        const topElement = this.stack.peek();
         if (!this.isValid(topElement)) {
             this.okayToContinue = false;
             return;
         }
         this.stack.push(topElement);
-    };
-    Solver.prototype.pop = function () {
-        var topElement = this.stack.pop();
+    }
+    pop() {
+        const topElement = this.stack.pop();
         if (!this.isValid(topElement)) {
             this.okayToContinue = false;
             return;
         }
-    };
-    Solver.prototype.add = function () {
-        this.performArithmetic(function (elem1, elem2) { return elem1 + elem2; });
-    };
-    Solver.prototype.subtract = function () {
-        this.performArithmetic(function (elem1, elem2) { return elem1 - elem2; });
-    };
-    Solver.prototype.performArithmetic = function (operationFunc) {
-        var topElement = this.stack.pop();
-        var secondElement = this.stack.pop();
+    }
+    add() {
+        this.performArithmetic((elem1, elem2) => elem1 + elem2);
+    }
+    subtract() {
+        this.performArithmetic((elem1, elem2) => elem1 - elem2);
+    }
+    performArithmetic(operationFunc) {
+        const topElement = this.stack.pop();
+        const secondElement = this.stack.pop();
         if (!this.isValid(topElement) || !this.isValid(secondElement)) {
             this.okayToContinue = false;
             return;
         }
-        var result = operationFunc(topElement, secondElement);
+        const result = operationFunc(topElement, secondElement);
         if (!this.isValid(result)) {
             this.okayToContinue = false;
             return;
         }
         this.stack.push(result);
-    };
-    Solver.prototype.addNumber = function (command) {
-        var element = parseInt(command);
+    }
+    addNumber(command) {
+        const element = parseInt(command);
         if (!this.isValid(element)) {
             this.okayToContinue = false;
             return;
         }
         this.stack.push(element);
-    };
-    Solver.prototype.isValid = function (value) {
+    }
+    isValid(value) {
         return typeof value !== "undefined" && value >= 0 && value < this.MAX_VALUE;
-    };
-    return Solver;
-}());
+    }
+}
 function solution(str) {
-    var solver = new Solver();
-    var result = solver.compute(str);
+    const solver = new Solver();
+    const result = solver.compute(str);
     // console.log(result);
     return result;
 }

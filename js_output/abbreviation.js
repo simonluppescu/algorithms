@@ -1,4 +1,3 @@
-"use strict";
 /**
  * Category: DYNAMIC_PROGRAMMING
  * Tags: strings recursion
@@ -10,41 +9,37 @@
  * Given two strings, A and B, determine if it's possible to make A equal to B as described.
  * If so, print YES on a new line. Otherwise, print NO.
  */
-Object.defineProperty(exports, "__esModule", { value: true });
 // NOTE: This algorithm is not optimal. It will timeout for very large strings.
-var assert = require("assert");
-var Abbreviator = /** @class */ (function () {
-    function Abbreviator() {
-    }
-    Abbreviator.prototype.evaluate = function (a, b) {
+import { assert } from "console";
+class Abbreviator {
+    evaluate(a, b) {
         this.memos = new Map();
         return this.run(a, b);
-    };
-    Abbreviator.prototype.run = function (a, b) {
+    }
+    run(a, b) {
         // Check if it is memoized
         if (this.memos.has(a))
             return this.memos.get(a);
         // Base cases
         if (a.length < b.length)
             return false;
-        var filteredUpper = (a.match(/[A-Z]/g) || []).join("");
+        const filteredUpper = (a.match(/[A-Z]/g) || []).join("");
         if (filteredUpper === b)
             return true;
         if (filteredUpper.length >= b.length && filteredUpper !== b)
             return false;
         // Body
-        var firstLowerIndex = a.match(/[a-z]/).index;
-        var taken = "" + a.slice(0, firstLowerIndex) + a.slice(firstLowerIndex + 1);
-        var upperCased = a.replace(/[a-z]/, a[firstLowerIndex].toUpperCase());
+        const firstLowerIndex = a.match(/[a-z]/).index;
+        const taken = `${a.slice(0, firstLowerIndex)}${a.slice(firstLowerIndex + 1)}`;
+        const upperCased = a.replace(/[a-z]/, a[firstLowerIndex].toUpperCase());
         // Memoize
-        var result = this.run(taken, b) || this.run(upperCased, b);
+        const result = this.run(taken, b) || this.run(upperCased, b);
         this.memos.set(a, result);
         // Done
         return result;
-    };
-    return Abbreviator;
-}());
-var foo = new Abbreviator();
+    }
+}
+const foo = new Abbreviator();
 assert(foo.evaluate("bBccC", "BBC"));
 assert(foo.evaluate("bBccC", "BC"));
 assert(foo.evaluate("bfBccC", "BC"));

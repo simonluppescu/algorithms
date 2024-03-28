@@ -5,16 +5,16 @@
  * Check if a Binary Tree is a Binary Search Tree
  */
 
-import * as assert from "assert";
+import { assert } from "console";
 
-import BinaryTree, { BinaryTreeNode } from "./utils/binaryTree";
+import BinaryTree, { BinaryTreeNode } from "./utils/binaryTree.js";
 
 function isBST(bt: BinaryTree): boolean {
   const node = bt.root;
   return compareLeft(node.value, node.left) && compareRight(node.value, node.right);
 }
 
-function compareLeft(value: string | number, node: BinaryTreeNode): boolean {
+function compareLeft(value: number, node: BinaryTreeNode): boolean {
   if (value >= node.value) {
     let result = true;
     if (node.left) {
@@ -23,13 +23,14 @@ function compareLeft(value: string | number, node: BinaryTreeNode): boolean {
     if (node.right) {
       result = result && compareRight(node.value, node.right);
     }
+
     return result;
   } else {
     return false;
   }
 }
 
-function compareRight(value: string | number, node: BinaryTreeNode): boolean {
+function compareRight(value: number, node: BinaryTreeNode): boolean {
   if (value <= node.value) {
     let result = true;
     if (node.left) {

@@ -4,7 +4,7 @@
  *
  * Merge two sorted arrays into one sorted array.
  */
-import assertArray from "./utils/assertArray";
+import assertArray from "./utils/assertArray.js";
 
 function mergeSortedArrayDel(arr1: number[], arr2: number[]): number[] {
   let result: number[] = [];
@@ -49,6 +49,8 @@ function mergeSortedArrayCopy(arr1: number[], arr2: number[]): number[] {
   return result;
 }
 
+// prettier-ignore
+// eslint-disable-next-line max-len
 assertArray(mergeSortedArrayDel([1, 3, 5, 7, 9, 13, 19], [2, 4, 6, 8]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 19]);
 assertArray(mergeSortedArrayDel([1, 5, 7, 10], [2, 6, 12, 14]), [1, 2, 5, 6, 7, 10, 12, 14]);
 assertArray(mergeSortedArrayDel([], [1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
@@ -56,6 +58,8 @@ assertArray(mergeSortedArrayDel([1], [1, 2, 3, 4, 5, 6]), [1, 1, 2, 3, 4, 5, 6])
 assertArray(mergeSortedArrayDel([1, 1, 1, 1, 1], [1, 1, 1, 1]), [1, 1, 1, 1, 1, 1, 1, 1, 1]);
 assertArray(mergeSortedArrayDel([], []), []);
 
+// prettier-ignore
+// eslint-disable-next-line max-len
 assertArray(mergeSortedArrayCopy([1, 3, 5, 7, 9, 13, 19], [2, 4, 6, 8]), [1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 19]);
 assertArray(mergeSortedArrayCopy([1, 5, 7, 10], [2, 6, 12, 14]), [1, 2, 5, 6, 7, 10, 12, 14]);
 assertArray(mergeSortedArrayCopy([], [1, 2, 3, 4, 5]), [1, 2, 3, 4, 5]);
