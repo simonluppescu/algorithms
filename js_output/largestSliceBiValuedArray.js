@@ -2,7 +2,8 @@
  * Category: ARRAYS
  * Tags: easy
  *
- * Given an array of integers, find the length of the largest slice of the array whose elements only consist of two values.
+ * Given an array of integers, find the length of the largest
+ * slice of the array whose elements only consist of two values.
  * For example:
  * 1 3 4 3 4 4 2 3
  * The answer is 5 since the slice 3 4 3 4 4 only consists of two values and it's largest.
