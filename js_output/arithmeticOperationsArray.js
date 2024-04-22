@@ -1,6 +1,6 @@
 /**
  * Category: ARRAYS
- * Tags: math algorithms
+ * Tags: math algorithms ranges
  *
  * We are given a length K, and a series of "operations". Each operation is performed
  * on a range of an array of length K, such as addition or subtraction of each element

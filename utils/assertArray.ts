@@ -1,4 +1,4 @@
-import { assert } from "console";
+import assert from "./assert.js";
 
 function assertArrayEquals(array1: any[], array2: any[]): void {
   assert(array1.length === array2.length);
