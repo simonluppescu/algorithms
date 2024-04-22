@@ -1,3 +1,12 @@
+/**
+ * Category: ARRAYS
+ * Tags: real_world algorithms
+ *
+ * Given a Master Mind board where you have Red, Green, Yellow, Blue marbles,
+ * check how many HITS and PSEUDO hits a guess has. A hit is when the color and
+ * position are correct, and a pseudo is when the color is right but in a different
+ * position.
+ */
 import assertArrayEquals from "./utils/assertArray.js";
 
 class MasterMind {
