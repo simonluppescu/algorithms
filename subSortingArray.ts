@@ -14,7 +14,7 @@ function findSubSortArray(arr: Array<number>): [number, number] {
   let left = arr.slice(0, m);
   let middle = arr.slice(m);
   while (m < arr.length) {
-    if (Math.max(...left) < Math.min(...middle)) {
+    if (Math.max(...left) <= Math.min(...middle)) {
       m++;
       left = arr.slice(0, m);
       middle = arr.slice(m);
@@ -47,4 +47,5 @@ assertArrayEquals(findSubSortArray([1, 2, 4, 7, 10, 11, 6, 12, 6, 7, 16, 18, 19]
 assertArrayEquals(findSubSortArray([1, 4, 2, 4, 5, 6, 7, 8]), [1, 3]);
 assertArrayEquals(findSubSortArray([1, 2, 3, 4, 5]), [0, 0]);
 assertArrayEquals(findSubSortArray([7, 6, 5, 4, 3]), [0, 4]);
+assertArrayEquals(findSubSortArray([1, 1, 1]), [0, 0]);
 console.log("All assertions passed.");
