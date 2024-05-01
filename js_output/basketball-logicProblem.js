@@ -13,7 +13,7 @@
  * The results show that the answer to this puzzle is that for values of p > 50%,
  * the player should pick Game 2.
  */
-const NUM_TRIALS = 10000;
+const NUM_TRIALS = 10_000;
 let chance = 0.05;
 function shootHoops() {
     let num = 0;

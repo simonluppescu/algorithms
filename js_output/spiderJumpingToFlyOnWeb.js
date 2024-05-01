@@ -13,6 +13,19 @@
  */
 import { assert } from "console";
 class JumpDistanceCalculator {
+    static RADIAL_MAPPER = {
+        A: 0,
+        B: 1,
+        C: 2,
+        D: 3,
+        E: 4,
+        F: 5,
+        G: 6,
+        H: 7,
+    };
+    static TOTAL_RADIALS = Object.keys(JumpDistanceCalculator.RADIAL_MAPPER).length;
+    spiderCoord;
+    flyCoord;
     constructor(spiderCoord, flyCoord) {
         this.spiderCoord = spiderCoord;
         this.flyCoord = flyCoord;
@@ -39,18 +52,9 @@ class JumpDistanceCalculator {
             2 * spiderRing * flyRing * Math.cos(radialDifference));
     }
 }
-JumpDistanceCalculator.RADIAL_MAPPER = {
-    A: 0,
-    B: 1,
-    C: 2,
-    D: 3,
-    E: 4,
-    F: 5,
-    G: 6,
-    H: 7,
-};
-JumpDistanceCalculator.TOTAL_RADIALS = Object.keys(JumpDistanceCalculator.RADIAL_MAPPER).length;
 class Coordinate {
+    radial;
+    ring;
     constructor(coordStr) {
         if (coordStr.length !== 2) {
             throw new Error("coordinate must be length 2.");

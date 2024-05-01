@@ -1,4 +1,6 @@
 class Graph {
+    edges;
+    root;
     constructor(root) {
         this.edges = {};
         this.root = root;
@@ -50,6 +52,9 @@ class Graph {
 }
 export default Graph;
 export class GraphNode {
+    adjacents;
+    visited;
+    value;
     constructor(value) {
         this.value = value;
         this.adjacents = [];

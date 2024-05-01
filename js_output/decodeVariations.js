@@ -8,6 +8,7 @@
  */
 import { assert } from "console";
 class Decoder {
+    seenValues;
     constructor() {
         this.seenValues = new Map();
     }

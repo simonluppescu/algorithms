@@ -1,4 +1,5 @@
 class BinaryTree {
+    root;
     constructor(root = new BinaryTreeNode(0, null, null)) {
         this.root = root;
     }
@@ -66,6 +67,10 @@ ${spacing}}`.trim();
     }
 }
 export class BinaryTreeNode {
+    value;
+    left;
+    right;
+    isVisited;
     constructor(value, left, right) {
         this.value = value;
         this.left = left;

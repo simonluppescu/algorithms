@@ -12,6 +12,7 @@
 // NOTE: This algorithm is not optimal. It will timeout for very large strings.
 import { assert } from "console";
 class Abbreviator {
+    memos;
     evaluate(a, b) {
         this.memos = new Map();
         return this.run(a, b);

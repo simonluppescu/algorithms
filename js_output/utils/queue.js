@@ -1,4 +1,5 @@
 class Queue {
+    array;
     constructor() {
         this.array = new Array();
     }

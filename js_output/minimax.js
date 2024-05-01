@@ -4,12 +4,17 @@
  */
 import * as readline from "readline";
 class Player {
+    name;
+    index;
     constructor(name, index) {
         this.name = name;
         this.index = index;
     }
 }
 class Hands {
+    static MAX_VALUE = 5;
+    left;
+    right;
     constructor(left = 1, right = 1) {
         this.left = left;
         this.right = right;
@@ -39,8 +44,11 @@ class Hands {
         }
     }
 }
-Hands.MAX_VALUE = 5;
 class Move {
+    player;
+    from;
+    to;
+    number;
     constructor(player, from, to, number) {
         this.player = player;
         this.from = from;
@@ -49,6 +57,11 @@ class Move {
     }
 }
 class State {
+    state;
+    players;
+    humanPlayer;
+    aiPlayer;
+    currentPlayerIndex;
     constructor(hand1 = new Hands(), hand2 = new Hands()) {
         this.state = [hand1, hand2];
         this.humanPlayer = new Player("simon", 0);
@@ -118,6 +131,7 @@ class State {
     }
 }
 class Game {
+    state;
     constructor() {
         this.state = new State();
     }

@@ -7,6 +7,7 @@
 import BinaryTree from "./utils/binaryTree.js";
 import Stack from "./utils/stack.js";
 class IterativeDFS {
+    tree;
     constructor(bt) {
         this.tree = bt;
     }

@@ -8,6 +8,10 @@
 import assertArrayEquals from "./utils/assertArray.js";
 import Dequeue from "./utils/dequeue.js";
 class Slider {
+    array;
+    k;
+    queue;
+    maxArray;
     constructor(arr, windowSize) {
         this.array = arr;
         this.k = windowSize;

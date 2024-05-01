@@ -16,6 +16,8 @@
  */
 import { assert } from "console";
 class ArithmeticSolver {
+    intervals;
+    arrayLen;
     constructor(k) {
         this.arrayLen = k;
         this.intervals = new Map();

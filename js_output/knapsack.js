@@ -8,6 +8,9 @@
  */
 import { assert } from "console";
 class Packer {
+    values;
+    weights;
+    memos;
     constructor(v, w) {
         this.values = v;
         this.weights = w;

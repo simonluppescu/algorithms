@@ -6,6 +6,8 @@
  */
 import assertArray from "./utils/assertArray.js";
 class BuildOrder {
+    packages;
+    visited;
     constructor(packs) {
         this.packages = packs;
         this.visited = new Set();

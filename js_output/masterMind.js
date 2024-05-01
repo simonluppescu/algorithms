@@ -9,6 +9,8 @@
  */
 import assertArrayEquals from "./utils/assertArray.js";
 class MasterMind {
+    solution;
+    colorCounts;
     constructor(solution) {
         this.solution = solution.split("");
         this.colorCounts = {};

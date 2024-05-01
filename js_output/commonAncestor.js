@@ -7,6 +7,8 @@ import BinaryTree from "./utils/binaryTree.js";
  * This algorithm is not optimal because it looks through nodes multiple times.
  */
 class Finder {
+    p;
+    q;
     constructor(value1, value2) {
         this.p = value1;
         this.q = value2;

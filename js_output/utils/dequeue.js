@@ -1,4 +1,5 @@
 class Dequeue {
+    array;
     constructor() {
         this.array = [];
     }

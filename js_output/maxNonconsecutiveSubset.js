@@ -8,6 +8,8 @@
  */
 import { assert } from "console";
 class MaxSubsetSolver {
+    array;
+    memos;
     constructor(arr) {
         this.array = arr;
     }

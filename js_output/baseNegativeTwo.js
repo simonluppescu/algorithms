@@ -12,6 +12,10 @@
  * Output: 101 (5)
  */
 class NotOptimalSolver {
+    bitArray;
+    bitValues;
+    decimalInput;
+    decimalOutput;
     constructor(arr) {
         this.bitArray = arr;
         this.bitValues = [];
@@ -67,6 +71,9 @@ class NotOptimalSolver {
     }
 }
 class OptimalSolver {
+    bitValues;
+    decimalInput;
+    decimalOutput;
     constructor(arr) {
         this.bitValues = [];
         this.decimalInput = this.computeInput(arr);

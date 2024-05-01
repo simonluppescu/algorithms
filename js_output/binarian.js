@@ -11,6 +11,7 @@
  */
 import { assert } from "console";
 class Binarian {
+    memos;
     constructor() {
         this.memos = new Map();
     }

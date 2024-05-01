@@ -6,6 +6,8 @@
  */
 import { assert } from "console";
 class Solver {
+    text;
+    charChecker;
     constructor(s) {
         this.text = s;
     }

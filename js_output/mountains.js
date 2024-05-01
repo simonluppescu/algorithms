@@ -1,4 +1,7 @@
 class Mountains {
+    peaks;
+    numRows;
+    numCols;
     constructor(height, width) {
         this.peaks = new Array();
         this.numRows = height;

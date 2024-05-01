@@ -8,6 +8,7 @@ import Graph from "./utils/graph.js";
 import Queue from "./utils/queue.js";
 import { assert } from "console";
 class BSTSearcher {
+    graph;
     constructor(g) {
         this.graph = g;
     }

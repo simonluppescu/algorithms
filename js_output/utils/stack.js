@@ -1,4 +1,5 @@
 class Stack {
+    stack;
     constructor() {
         this.stack = new Array();
     }

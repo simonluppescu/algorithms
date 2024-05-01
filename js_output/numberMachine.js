@@ -15,8 +15,10 @@
 import Stack from "./utils/stack.js";
 import { assert } from "console";
 class Solver {
+    MAX_VALUE = 2 ** 20;
+    stack;
+    okayToContinue;
     constructor() {
-        this.MAX_VALUE = 2 ** 20;
         this.stack = new Stack();
         this.okayToContinue = true;
     }

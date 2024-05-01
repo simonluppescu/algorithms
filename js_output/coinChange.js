@@ -7,6 +7,7 @@
  */
 import { assert } from "console";
 class Changer {
+    coins;
     constructor(coins) {
         this.coins = coins;
     }
@@ -28,6 +29,8 @@ class Changer {
     }
 }
 class ChangerMemoized {
+    coins;
+    storedValues;
     constructor(coins) {
         this.coins = coins;
         this.storedValues = {};

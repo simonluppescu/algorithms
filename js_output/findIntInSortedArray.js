@@ -6,6 +6,12 @@
  */
 import { assert } from "console";
 class Searcher {
+    array;
+    currValue;
+    lowerBound;
+    upperBound;
+    currIndex;
+    counter;
     constructor(array) {
         this.array = array;
     }

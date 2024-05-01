@@ -1,5 +1,7 @@
 import { assert } from "console";
 class Line {
+    slope;
+    intercept;
     constructor(slope, intercept) {
         this.slope = slope;
         this.intercept = intercept;

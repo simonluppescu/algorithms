@@ -9,6 +9,9 @@
  */
 import Stack from "./utils/stack.js";
 class Hanoi {
+    towers;
+    triedMoves;
+    solvedKey;
     constructor(maxValue) {
         this.towers = [];
         this.towers.push(new Tower(maxValue));
@@ -89,6 +92,8 @@ class Tower extends Stack {
     }
 }
 class Move {
+    originIndex;
+    destIndex;
     constructor(o, d) {
         this.originIndex = o;
         this.destIndex = d;
