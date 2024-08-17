@@ -1,7 +1,7 @@
 {
   "type": "module",
   "scripts": {
-    "watch": "tsc -w -p ."
+    "start": "tsc -w -p ."
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.3.0",
